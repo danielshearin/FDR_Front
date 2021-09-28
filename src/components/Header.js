@@ -4,12 +4,18 @@ import React from 'react'
 // import Time from './Time.js';
 // import Day from './Day.js';
 import FindRestaurant from './FindRestaurant.js';
+import HighPrice from './HighPrice.js';
+import LowPrice from './LowPrice.js';
+import Time from './Time.js';
+import Day from './Day.js';
 
 function Header () {
   return (
 
     <div><h2>FIVE DOLLAR LUNCH</h2>
-    <p><FindRestaurant /></p>
+
+    <ul><li><LowPrice /></li><li><HighPrice /></li><li><Time /></li><li><Day /></li>
+    </ul>
     </div>
   )
 }
