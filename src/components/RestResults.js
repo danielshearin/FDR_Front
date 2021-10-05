@@ -7,7 +7,7 @@ function RestResults ({ data }) {
             {!data
             ? (
                 <div>
-                    <p>Please enter Restaurant</p>
+                    <h1>RESULTS</h1>
                 </div>)
                 : (
                     <div>
