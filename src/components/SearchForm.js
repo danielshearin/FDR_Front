@@ -1,9 +1,11 @@
 import React, { Fragment } from "react";
 import { Field, reduxForm } from "redux-form";
+// import { Form, Field } from 'react-final-form';
 import { Form } from "semantic-ui-react";
 import _ from 'lodash';
 import RestResults from "./RestResults";
-// import axios from "axios";
+import axios from "axios";
+
 
 
 
@@ -28,7 +30,7 @@ const getOptions = (number, prefix = 'Choice ') =>
 
 
 const dayOptions=[
-    { key: 'a', text: 'ALL DAYS', value: 'allDays' },
+    { key: 'a', text: 'All Days', value: 'allDays' },
     { key: 'weekends', text: 'Weekends', value: 'weekends' },
     { key: 'weekdays', text: 'Weekdays', value: 'weekdays' },
     { key: 'm', text: 'Monday', value: 'monday' },
@@ -40,13 +42,13 @@ const dayOptions=[
     { key: 'su', text: 'Sunday', value: 'sunday' }
 ]
 
-const mealOptions=[
-    { key: 'all', text: 'ALL TIMES', value: 'allTimes' },
-    { key: 'breakfast', text: 'breakfast', value: 'breakfast' },
-    { key: 'lunch', text: 'lunch', value: 'lunch' },
-    { key: 'dinner', text: 'dinner', value: 'dinner' },
-    { key: 'late-night', text: 'late-night', value: 'late-night' },
-    { key: 'brunch', text: 'brunch', value: 'brunch' }
+const dietaryOptions=[
+    { key: 'all', text: 'No Restrictions', value: 'all' },
+    { key: 'vegetarian', text: 'vegetarian', value: 'vegetarian' },
+    { key: 'vegan', text: 'vegan', value: 'vegan' },
+    { key: 'glueten-free', text: 'glueten-free', value: 'glueten-free' },
+    { key: 'vegetarian_and_gluten-free', text: 'vegetarian and gluten-free', value: 'vegetarian_and_luten-free' },
+    { key: 'vegan_and_gluten-free', text: 'vegan and gluten-free', value: 'vegan_and_gluten-free' }
 ]
 
 const timeOptions=[
@@ -90,7 +92,7 @@ const SearchForm = props => {
                         name="priceLow"
                         selection
                         options={getOptions(50, '')}
-                        placeholder="Price Low"
+                        placeholder={1}
                     />
                     <Field
                         label="Price High"
@@ -98,21 +100,14 @@ const SearchForm = props => {
                         name="priceHigh"
                         selection
                         options={getOptions(50, '')}
-                        placeholder="Price High"
+                        placeholder={49}
                     />
                     <Field
                         label="Day"
                         component={renderSelect}
                         name="day"                    
                         fluid multiple selection options={dayOptions}
-                        placeholder="Day"
-                    />
-                    <Field
-                        label="Meal"
-                        component={renderSelect}
-                        name="meal"                    
-                        fluid multiple selection options={mealOptions}
-                        placeholder="Meal"
+                        placeholder="All Days"
                     />
                     <Field
                         label="Time"
@@ -121,8 +116,15 @@ const SearchForm = props => {
                         options={timeOptions}
                         placeholder="Time"
                     />
+                    <Field
+                        label="Dietary Restrictions"
+                        component={renderSelect}
+                        name="dietary"                    
+                        fluid multiple selection options={dietaryOptions}
+                        placeholder="No Restrictions"
+                    />
 
-                    <Form.Button primary>GO</Form.Button>
+                    <Form.Button primary onClick={handleSubmit}>GO</Form.Button>
                     <Form.Button onClick={reset}>Reset</Form.Button>
                 </Form.Group>
             </Form>

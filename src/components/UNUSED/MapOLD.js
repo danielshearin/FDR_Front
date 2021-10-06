@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl, { Marker } from 'mapbox-gl';
-import geoJson from './chicago-parks.json'
 
 
 

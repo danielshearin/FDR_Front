@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from 'mapbox-gl';
-import restaurants from './test.json'
 import axios from 'axios';
+import { Divider } from "semantic-ui-react";
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsc2hlYXJpbiIsImEiOiJja3U1bmZteXAwcmttMnBtcmpmYmRvc3FxIn0.4A5oFR0BXqoK60ppEgngJQ';
@@ -22,49 +22,25 @@ const Map = () => {
       zoom: zoom,
     });
 
+// Place Default Markers
+    const restaurants = axios.get("/api/restaurants")
+    .then(response => {
+      const restaurants = response.data
+      restaurants.map((restaurant) => {
+        const coordinates = [(restaurant.longitude), (restaurant.latitude)]
+          new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
+        });
+  })
     
-    // const getRestaurants = () => {
-    //   axios
-    //     .get("/api/restaurants/")
-    //     .then((response) => {
-    //       return response.data
-    //     })
-    //     .catch((err) => console.log(err));
-    // };
-
-    // const restaurants = getRestaurants()
-
-    // console.log(restaurants)
-
-    async function getRestaurants() {
-      try {
-        const {data: response} = await axios.get("/api/restaurants")
-        return response
-      }
-      catch (error) {
-        console.log(error);
-      }
-    }
-
-    const restaurants = getRestaurants()
-    console.log(restaurants)
-    
-
-    // Create default markers
-    restaurants.map((restaurant) => {
-    const coordinates = [(restaurant.longitude), (restaurant.latitude)]
-    console.log(coordinates)
-      new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
-    });
 
     // Add navigation control (the +/- zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
-    // map.on('move', () => {
-    //   setLng(map.getCenter().lng.toFixed(4));
-    //   setLat(map.getCenter().lat.toFixed(4));
-    //   setZoom(map.getZoom().toFixed(2));
-    // });
+    map.on('move', () => {
+      setLng(map.getCenter().lng.toFixed(4));
+      setLat(map.getCenter().lat.toFixed(4));
+      setZoom(map.getZoom().toFixed(2));
+    });
 
     // Clean up on unmount
     return () => map.remove();
@@ -73,6 +49,7 @@ const Map = () => {
   return (
     <div>
       <div className="map-container" ref={mapContainerRef} />
+      <Divider hidden/>
     </div>
   );
 };
