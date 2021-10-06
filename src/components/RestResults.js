@@ -1,7 +1,7 @@
 import React from "react";
 import RestaurantCard from './RestaurantCard';
 
-function RestResults ({ data }) {
+function RestResults ({ data, count }) {
     return (
         <>
             {!data
@@ -11,22 +11,26 @@ function RestResults ({ data }) {
                 </div>)
                 : (
                     <div>
+                        <h1>{count} results in your area</h1>
+                        {}
                         {data.map((item) => {
                             return (
                                 <RestaurantCard
                                 id={item.id}
-                                name={item.name}
-                                city={item.city}
-                                street={item.street}
-                                zip={item.zip}
-                                phone={item.phone}
+                                item={item.item}
+                                restaurant={item.restaurant}
+                                price={item.price}
+                                description={item.description}
+                                day={item.day}
+                                dietary={item.dietary}
+                                open_time={item.open_time}
+                                close_time={item.close_time}
                                 />
                             )
-                        })}
+                        }
+                        )}
                     </div>
-                )
-        
-        }
+                )}
         </>
     )
 }

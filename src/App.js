@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
+// import axios from "axios";
 import TopBar from './components/TopBar.js';
 import Map from './components/Map.js';
 import RestResults from "./components/RestResults.js";
 
 
 function App () {
-  const refreshList = () => {
-    axios
-      .get("/api/restaurants/")
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
-  };
+  // const refreshList = () => {
+  //   axios
+  //     .get("/api/restaurants/")
+  //     .then((res) => console.log(res.data))
+  //     .catch((err) => console.log(err));
+  // };
 
-  console.log(refreshList())
+  // console.log(refreshList())
 
   return (
     <div>

@@ -1,17 +1,20 @@
 import React from 'react';
 
 const RestaurantCard = props => {
-    const {id, name, city, street, zip, phone } = props
+    const {id, item, restaurant, price, description, day, dietary, open_time, close_time } = props
 
     return (
         <>
             <div>
                 <p>{id}
-                {name}
-                {city}
-                {street}
-                {zip}
-                {phone}</p>
+                {item}
+                {restaurant}
+                {price}
+                {description}
+                {day}
+                {dietary}
+                {open_time}
+                {close_time}</p>
             </div>
         </>
     )

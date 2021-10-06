@@ -1,10 +1,4 @@
 import React from 'react'
-// import FindRestaurant from './FindRestaurant.js';
-// import HighPrice from './HighPrice.js';
-// import LowPrice from './LowPrice.js';
-// import Time from './Time.js';
-// import Day from './Day.js';
-// import Map from './Map.js';
 import { connect } from "react-redux";
 import { Container, Divider, Header, Message } from "semantic-ui-react";
 import SearchForm from './SearchForm.js';

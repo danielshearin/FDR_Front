@@ -1,7 +1,9 @@
 import React, { Fragment } from "react";
 import { Field, reduxForm } from "redux-form";
-import { Form, Dropdown } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import _ from 'lodash';
+import RestResults from "./RestResults";
+// import axios from "axios";
 
 
 
@@ -15,7 +17,7 @@ const renderSelect = (field) => (
         placeholder={field.placeholder}
         value={field.input.value}
     />
-  );
+);
 
 const getOptions = (number, prefix = 'Choice ') =>
     _.times(number, (index) => ({
@@ -23,7 +25,8 @@ const getOptions = (number, prefix = 'Choice ') =>
         text: `${prefix}${index}`,
         value: index,
 }))
-    
+
+
 const dayOptions=[
     { key: 'a', text: 'ALL DAYS', value: 'allDays' },
     { key: 'weekends', text: 'Weekends', value: 'weekends' },
@@ -73,7 +76,7 @@ const timeOptions=[
     { key: '4 am', text: '4 am', value: '28' },
 ]
 
-    
+
 const SearchForm = props => {
     const { handleSubmit, reset } = props;
 
