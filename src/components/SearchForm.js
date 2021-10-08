@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { Field, reduxForm } from "redux-form";
-import { Form, Dropdown, Divider } from "semantic-ui-react";
+import { Form, Dropdown, Divider, Button } from "semantic-ui-react";
 import _ from 'lodash';
 import axios from "axios";
 import RestResults from "./RestResults";
@@ -79,7 +79,8 @@ const SearchForm = () => {
       try {
         e.preventDefault()
         const result = await axios
-          .get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)
+          // .get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)
+          .get(`/api/menuitems`)
       } catch (error) {
         console.error(error.message)
       }
@@ -98,7 +99,7 @@ const SearchForm = () => {
               // component={renderSelect}
               fluid search selection
               options={getOptions(50, '')}
-              onChange={e => setPriceLow(e.target.value),
+              onChange={(e, {value}) => {setPriceLow(value)},
                 console.log(priceLow)}
             />
           <br />
@@ -154,13 +155,13 @@ const SearchForm = () => {
             <br />
           
           
-          <Form.Button primary>GO</Form.Button>
+          <Button type='submit'>GO</Button>
 
           <Divider hidden />
         </Form>
         
-        {/* <MenuItemResults data={result} count={count} /> */}
-
+        <strong>onChange:</strong>
+        <pre>{JSON.stringify({ priceLow, priceHigh, day, time, dietary }, null, 2)}</pre>
       </>
     )
   }
@@ -168,7 +169,3 @@ const SearchForm = () => {
 
 
 export default SearchForm
-
-// export default reduxForm({
-//   form: "profile"
-// })(SearchForm);
