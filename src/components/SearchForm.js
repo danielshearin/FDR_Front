@@ -1,25 +1,10 @@
-import React, { Fragment } from "react";
-import { Field, reduxForm } from "redux-form";
-// import { Form, Field } from 'react-final-form';
-import { Form } from "semantic-ui-react";
+import React, { useState } from "react";
+// import { Field, reduxForm } from "redux-form";
+import { Form, Dropdown, Divider } from "semantic-ui-react";
 import _ from 'lodash';
 import RestResults from "./RestResults";
 import axios from "axios";
-
-
-
-
-    
-const renderSelect = (field) => (
-    <Form.Select
-        label={field.label}
-        name={field.input.name}
-        onChange={(e, { value }) => field.input.onChange(value)}
-        options={field.options}
-        placeholder={field.placeholder}
-        value={field.input.value}
-    />
-);
+import MenuItemResults from "./ItemResults";
 
 const getOptions = (number, prefix = 'Choice ') =>
     _.times(number, (index) => ({
@@ -42,6 +27,7 @@ const dayOptions=[
     { key: 'su', text: 'Sunday', value: 'sunday' }
 ]
 
+
 const dietaryOptions=[
     { key: 'all', text: 'No Restrictions', value: 'all' },
     { key: 'vegetarian', text: 'vegetarian', value: 'vegetarian' },
@@ -50,6 +36,7 @@ const dietaryOptions=[
     { key: 'vegetarian_and_gluten-free', text: 'vegetarian and gluten-free', value: 'vegetarian_and_luten-free' },
     { key: 'vegan_and_gluten-free', text: 'vegan and gluten-free', value: 'vegan_and_gluten-free' }
 ]
+
 
 const timeOptions=[
     { key: '5 am', text: '5 am', value: '5' },
@@ -79,59 +66,104 @@ const timeOptions=[
 ]
 
 
-const SearchForm = props => {
-    const { handleSubmit, reset } = props;
+const SearchForm = () => {
+  // const [result, setResult] = useState()
+  // const [count, setCount] = useState(0)
+    const [priceLow, setPriceLow] = useState(1)
+    const [priceHigh, setPriceHigh] = useState(49)
+    const [day, setDay] = useState('all')
+    const [time, setTime] = useState('all')
+    const [dietary, setDietary] = useState('none')
 
+    const handleSubmit = async (e) => {
+      try {
+        e.preventDefault()
+        const result = await axios
+          .get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)
+      } catch (error) {
+        console.error(error.message)
+      }
+    }
+
+// console.log(priceLow, priceHigh, day, time, dietary)
+
+// Using Semantic UI for forms and dropdown menus
     return (
-        <Fragment>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group inline widths="equal">
-                    <Field
-                        label="Price Low"
-                        component={renderSelect}
-                        name="priceLow"
-                        selection
-                        options={getOptions(50, '')}
-                        placeholder={1}
-                    />
-                    <Field
-                        label="Price High"
-                        component={renderSelect}
-                        name="priceHigh"
-                        selection
-                        options={getOptions(50, '')}
-                        placeholder={49}
-                    />
-                    <Field
-                        label="Day"
-                        component={renderSelect}
-                        name="day"                    
-                        fluid multiple selection options={dayOptions}
-                        placeholder="All Days"
-                    />
-                    <Field
-                        label="Time"
-                        component={renderSelect}
-                        name="time"                    
-                        options={timeOptions}
-                        placeholder="Time"
-                    />
-                    <Field
-                        label="Dietary Restrictions"
-                        component={renderSelect}
-                        name="dietary"                    
-                        fluid multiple selection options={dietaryOptions}
-                        placeholder="No Restrictions"
-                    />
+      <>
+        <Form onSubmit={handleSubmit}>
+          <strong>Price Low $</strong>
+            <Dropdown
+              placeholder='1'
+              // value={priceLow}
+              // component={renderSelect}
+              fluid search selection
+              options={getOptions(50, '')}
+              onChange={e => setPriceLow(e.target.value)}
+            />
+          <br />
+          <strong>Price High $</strong>
+            <Dropdown
+              label='Price High'
+              placeholder='49'
+              // value={priceHigh}
+              // component={renderSelect}
+              fluid search selection
+              options={getOptions(50, '')}
+              onChange={e => setPriceHigh(e.target.value)}
+            />
+          <br />
+          <strong>Day</strong>
+            <Dropdown
+              label='Day'
+              // value={day}
+              // component={renderSelect}
+              fluid search selection
+              fluid multiple selection
+              options={dayOptions}
+              placeholder="All Days"
+              onChange={e => setDay(e.target.value)}
+            />
+          <br />
+          <strong>Time</strong>
+            <Dropdown
+              label='Time'
+              // value={time}
+              // component={renderSelect}
+              fluid search selection
+              options={timeOptions}
+              placeholder="Time"
+              onChange={e => setTime(e.target.value)}
+            />
+          <br />
+          <strong>Dietary Restrictions</strong>
+            <Dropdown
+              label='Dietary Restrictions'
+              // value={dietary}
+              // component={renderSelect}
+              placeholder='No Restrictions'
+              fluid search selection
+              fluid multiple selection
+              options={dietaryOptions}
+              onChange={e => setDietary(e.target.value)}
+            />
+            <br />
+          
+          
+          <Form.Button primary>GO</Form.Button>
 
-                    <Form.Button primary onClick={handleSubmit}>GO</Form.Button>
-                    <Form.Button onClick={reset}>Reset</Form.Button>
-                </Form.Group>
-            </Form>
-        </Fragment>
-    );
-};
+          <Divider hidden />
+        </Form>
+        
+        {/* <MenuItemResults data={result} count={count} /> */}
 
-export default reduxForm({
-    form: "profile"
-})(SearchForm);
+      </>
+    )
+  }
+
+
+
+export default SearchForm
+
+// export default reduxForm({
+//   form: "profile"
+// })(SearchForm);

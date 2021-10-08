@@ -7,7 +7,7 @@ function RestResults ({ data, count }) {
             {!data
             ? (
                 <div>
-                    <h1>RESULTS</h1>
+                    <h3>RESULTS</h3>
                 </div>)
                 : (
                     <div>

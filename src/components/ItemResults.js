@@ -11,7 +11,7 @@ function MenuItemResults ({ data, count }) {
             <Divider hidden />
         
             <Header as="h1" dividing>
-                RESULTS
+                Results
             </Header>
             </Container>)
         : (

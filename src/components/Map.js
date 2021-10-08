@@ -28,7 +28,7 @@ const Map = () => {
       const restaurants = response.data
       restaurants.map((restaurant) => {
         const coordinates = [(restaurant.longitude), (restaurant.latitude)]
-          new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
+        new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
         });
   })
     
