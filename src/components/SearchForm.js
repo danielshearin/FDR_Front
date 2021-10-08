@@ -71,9 +71,9 @@ const SearchForm = () => {
   // const [count, setCount] = useState(0)
     const [priceLow, setPriceLow] = useState(1)
     const [priceHigh, setPriceHigh] = useState(49)
-    const [day, setDay] = useState('all')
-    const [time, setTime] = useState('all')
-    const [dietary, setDietary] = useState('none')
+    const [day, setDay] = useState('allDays')
+    const [time, setTime] = useState(null)
+    const [dietary, setDietary] = useState('all')
 
     const handleSubmit = async (e) => {
       try {
@@ -110,7 +110,8 @@ const SearchForm = () => {
               // component={renderSelect}
               fluid search selection
               options={getOptions(50, '')}
-              onChange={e => setPriceHigh(e.target.value)}
+              onChange={e => setPriceHigh(e.target.value),
+              console.log(priceHigh)}
             />
           <br />
           <strong>Day</strong>
@@ -122,7 +123,8 @@ const SearchForm = () => {
               fluid multiple selection
               options={dayOptions}
               placeholder="All Days"
-              onChange={e => setDay(e.target.value)}
+              onChange={e => setDay(e.target.value),
+              console.log(day)}
             />
           <br />
           <strong>Time</strong>
@@ -133,7 +135,8 @@ const SearchForm = () => {
               fluid search selection
               options={timeOptions}
               placeholder="Time"
-              onChange={e => setTime(e.target.value)}
+              onChange={e => setTime(e.target.value),
+              console.log(time)}
             />
           <br />
           <strong>Dietary Restrictions</strong>
@@ -145,7 +148,8 @@ const SearchForm = () => {
               fluid search selection
               fluid multiple selection
               options={dietaryOptions}
-              onChange={e => setDietary(e.target.value)}
+              onChange={e => setDietary(e.target.value),
+              console.log(dietary)}
             />
             <br />
           
