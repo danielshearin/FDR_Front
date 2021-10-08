@@ -2,8 +2,8 @@ import React, { useState } from "react";
 // import { Field, reduxForm } from "redux-form";
 import { Form, Dropdown, Divider } from "semantic-ui-react";
 import _ from 'lodash';
-import RestResults from "./RestResults";
 import axios from "axios";
+import RestResults from "./RestResults";
 import MenuItemResults from "./ItemResults";
 
 const getOptions = (number, prefix = 'Choice ') =>
@@ -32,9 +32,9 @@ const dietaryOptions=[
     { key: 'all', text: 'No Restrictions', value: 'all' },
     { key: 'vegetarian', text: 'vegetarian', value: 'vegetarian' },
     { key: 'vegan', text: 'vegan', value: 'vegan' },
-    { key: 'glueten-free', text: 'glueten-free', value: 'glueten-free' },
-    { key: 'vegetarian_and_gluten-free', text: 'vegetarian and gluten-free', value: 'vegetarian_and_luten-free' },
-    { key: 'vegan_and_gluten-free', text: 'vegan and gluten-free', value: 'vegan_and_gluten-free' }
+    { key: 'glueten-free', text: 'gluten-free', value: 'glueten-free' },
+    // { key: 'vegetarian_and_gluten-free', text: 'vegetarian and gluten-free', value: 'vegetarian_and_luten-free' },
+    // { key: 'vegan_and_gluten-free', text: 'vegan and gluten-free', value: 'vegan_and_gluten-free' }
 ]
 
 
@@ -94,11 +94,12 @@ const SearchForm = () => {
           <strong>Price Low $</strong>
             <Dropdown
               placeholder='1'
-              // value={priceLow}
+              // value={setPriceLow}
               // component={renderSelect}
               fluid search selection
               options={getOptions(50, '')}
-              onChange={e => setPriceLow(e.target.value)}
+              onChange={e => setPriceLow(e.target.value),
+                console.log(priceLow)}
             />
           <br />
           <strong>Price High $</strong>
@@ -127,7 +128,7 @@ const SearchForm = () => {
           <strong>Time</strong>
             <Dropdown
               label='Time'
-              // value={time}
+              // value={value}
               // component={renderSelect}
               fluid search selection
               options={timeOptions}
