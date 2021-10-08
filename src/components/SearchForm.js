@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { Field, reduxForm } from "redux-form";
 import { Form, Dropdown, Divider, Button } from "semantic-ui-react";
 import _ from 'lodash';
 import axios from "axios";
@@ -79,14 +78,12 @@ const SearchForm = () => {
       try {
         e.preventDefault()
         const result = await axios
-          // .get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)
-          .get(`/api/menuitems`)
+          .get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)
+          // .get(`/api/menuitems`)
       } catch (error) {
         console.error(error.message)
       }
     }
-
-// console.log(priceLow, priceHigh, day, time, dietary)
 
 // Using Semantic UI for forms and dropdown menus
     return (
@@ -95,12 +92,10 @@ const SearchForm = () => {
           <strong>Price Low $</strong>
             <Dropdown
               placeholder='1'
-              // value={setPriceLow}
-              // component={renderSelect}
+              // value={priceLow}
               fluid search selection
               options={getOptions(50, '')}
-              onChange={(e, {value}) => {setPriceLow(value)},
-                console.log(priceLow)}
+              onChange={(e, {value}) => {setPriceLow(value)}}
             />
           <br />
           <strong>Price High $</strong>
@@ -108,49 +103,39 @@ const SearchForm = () => {
               label='Price High'
               placeholder='49'
               // value={priceHigh}
-              // component={renderSelect}
               fluid search selection
               options={getOptions(50, '')}
-              onChange={e => setPriceHigh(e.target.value),
-              console.log(priceHigh)}
+              onChange={(e, {value}) => {setPriceHigh(value)}}
             />
           <br />
           <strong>Day</strong>
             <Dropdown
-              label='Day'
               // value={day}
-              // component={renderSelect}
               fluid search selection
               fluid multiple selection
               options={dayOptions}
               placeholder="All Days"
-              onChange={e => setDay(e.target.value),
-              console.log(day)}
+              onChange={(e, {value}) => {setDay(value)}}
             />
           <br />
           <strong>Time</strong>
             <Dropdown
-              label='Time'
-              // value={value}
-              // component={renderSelect}
+              // value={time}
               fluid search selection
               options={timeOptions}
               placeholder="Time"
-              onChange={e => setTime(e.target.value),
-              console.log(time)}
+              onChange={(e, {value}) => {setTime(value)}}
             />
           <br />
           <strong>Dietary Restrictions</strong>
             <Dropdown
               label='Dietary Restrictions'
               // value={dietary}
-              // component={renderSelect}
               placeholder='No Restrictions'
               fluid search selection
               fluid multiple selection
               options={dietaryOptions}
-              onChange={e => setDietary(e.target.value),
-              console.log(dietary)}
+              onChange={(e, {value}) => {setDietary(value)}}
             />
             <br />
           
@@ -159,7 +144,7 @@ const SearchForm = () => {
 
           <Divider hidden />
         </Form>
-        
+
         <strong>onChange:</strong>
         <pre>{JSON.stringify({ priceLow, priceHigh, day, time, dietary }, null, 2)}</pre>
       </>
