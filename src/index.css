@@ -1,10 +1,15 @@
 body {
+  color: #794949;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-color: #F3F3E7; */
+  /* background-color: #f5f1fd; */
+  background-color: #fff;
 }
 
 code {
@@ -12,10 +17,110 @@ code {
     monospace;
 }
 
+.ui.header {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color:rgb(255, 255, 255);  
+}
+
+.ui.search.dropdown>.text {
+  font-weight: bold;
+  color:#7bdada;
+}
+
+.ui.dropdown:not(.button)>.default.text {
+  font-weight: normal;
+  color: rgba(191,191,191,.87);
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.label {
+  font-size: 11pt;
+  padding-bottom: 5px;
+  
+}
+
+.ui.label {
+  color:rgb(252, 252, 252);
+  background-color: #7bdada;
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.ui.multiple.dropdown>.label {
+  box-shadow: 0 0 0 0px rgb(34 36 38 / 15%) inset;
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.ui.dropdown .menu>.item,
+.ui.dropdown.selected,
+.ui.dropdown .menu .selected.item {
+  color: rgba(165, 165, 165, 0.87);
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.ui.selection.dropdown {
+  border: 0px solid rgba(29, 30, 32, 0.15);
+}
+
+.ui.button {
+  background:#7bdada;
+  color:#fdfdfd;
+  font-weight: 2000px;
+  border-color: #ffffff;
+  border-style: solid;
+  border-width: 4px;
+  font-size: 12pt;
+}
+
+.ui.form {
+  padding-top: 2rem;
+}
+
+.ui.dropdown:not(.button)>.default.text {
+  font-weight: normal;
+  color: rgba(165, 165, 165, 0.87);
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.page_header {
+  color: #21232c;
+  background-size: cover;
+  background-image: url("https://images.squarespace-cdn.com/content/v1/5730e30740261d67c70e1dad/1598471773428-38NRF0DD0O5OYSFHQD72/Screen+Shot+2020-08-26+at+2.46.53+PM.png?format=2500w");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5px 20px;
+  margin: 8px 0;
+  border-radius: 12px;
+}
+
+.results {
+  color: #21232c;
+  background-color: #ecaf3c;
+  padding: 20px 20px;
+  margin: 8px 0;
+  border-radius: 12px;
+}
+.form {
+  color: #ffffff;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 12px;
+  /* background-color: #21232c; */
+  background-color: #7bdada;
+}
+
 .map-container {
-  height: 400px;
-  width: 85%;
-  margin: auto;
+  height: 500px;
+  /* border-color: #ffffff;
+  border-style: solid; */
+  /* border-width: 4px; */
+  border-radius: 12px;
+}
+
+.button {
+  color: rgb(70, 180, 207);
 }
 
 .sidebar {

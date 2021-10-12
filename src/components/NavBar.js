@@ -5,11 +5,15 @@ import SearchForm from './SearchForm.js';
 
 const NavBar = props => (
   <Container>
+    <div class="page_header">
     <Divider hidden />
 
-    <Header as="h1" dividing>
-      5 DOLLAR LUNCH
+    {/* <Header as="h1"  dividing> */}
+    <Header as="h1">
+      <strong>5 DOLLAR LUNCH</strong>
     </Header>
+    <Divider hidden />
+  </div>
     <SearchForm onSubmit={() => console.log("SeachForm was submitted")} />
 
     <Divider hidden />

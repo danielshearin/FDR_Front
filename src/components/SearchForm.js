@@ -65,6 +65,8 @@ const timeOptions=[
 ]
 
 
+
+
 const SearchForm = () => {
   // const [result, setResult] = useState()
   // const [count, setCount] = useState(0)
@@ -88,8 +90,9 @@ const SearchForm = () => {
 // Using Semantic UI for forms and dropdown menus
     return (
       <>
-        <Form onSubmit={handleSubmit}>
-          <strong>Price Low $</strong>
+        <Form class="form" onSubmit={handleSubmit}>
+          {/* <Form.Group inline widths='equal'> */}
+          <div class='label'><strong>Price Low $</strong></div>
             <Dropdown
               placeholder='1'
               // value={priceLow}
@@ -98,7 +101,7 @@ const SearchForm = () => {
               onChange={(e, {value}) => {setPriceLow(value)}}
             />
           <br />
-          <strong>Price High $</strong>
+          <div class='label'><strong>Price High $</strong></div>
             <Dropdown
               label='Price High'
               placeholder='49'
@@ -107,8 +110,9 @@ const SearchForm = () => {
               options={getOptions(50, '')}
               onChange={(e, {value}) => {setPriceHigh(value)}}
             />
+          {/* </Form.Group> */}
           <br />
-          <strong>Day</strong>
+          <div class='label'><strong>Day</strong></div>
             <Dropdown
               // value={day}
               fluid search selection
@@ -118,7 +122,7 @@ const SearchForm = () => {
               onChange={(e, {value}) => {setDay(value)}}
             />
           <br />
-          <strong>Time</strong>
+          <div class='label'><strong>Time</strong></div>
             <Dropdown
               // value={time}
               fluid search selection
@@ -127,7 +131,7 @@ const SearchForm = () => {
               onChange={(e, {value}) => {setTime(value)}}
             />
           <br />
-          <strong>Dietary Restrictions</strong>
+          <div class='label'><strong>Dietary Needs</strong></div>
             <Dropdown
               label='Dietary Restrictions'
               // value={dietary}
@@ -139,12 +143,12 @@ const SearchForm = () => {
             />
             <br />
           
-          
-          <Button type='submit'>GO</Button>
+          <Divider hidden />
+          <Button type='submit' class='button'>GO</Button>
 
           <Divider hidden />
         </Form>
-
+        <Divider hidden />
         <strong>onChange:</strong>
         <pre>{JSON.stringify({ priceLow, priceHigh, day, time, dietary }, null, 2)}</pre>
       </>

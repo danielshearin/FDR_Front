@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from 'mapbox-gl';
 import axios from 'axios';
-import { Divider } from "semantic-ui-react";
+import { Divider, Container } from "semantic-ui-react";
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsc2hlYXJpbiIsImEiOiJja3U1bmZteXAwcmttMnBtcmpmYmRvc3FxIn0.4A5oFR0BXqoK60ppEgngJQ';
@@ -47,10 +47,10 @@ const Map = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div>
+    <Container>
       <div className="map-container" ref={mapContainerRef} />
       <Divider hidden/>
-    </div>
+    </Container>
   );
 };
 

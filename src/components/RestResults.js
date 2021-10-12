@@ -6,7 +6,7 @@ function RestResults ({ data, count }) {
         <>
             {!data
             ? (
-                <div>
+                <div class="page_header">
                     <h3>RESULTS</h3>
                 </div>)
                 : (
