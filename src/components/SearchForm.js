@@ -72,8 +72,8 @@ const SearchForm = () => {
   // const [count, setCount] = useState(0)
     const [priceLow, setPriceLow] = useState(1)
     const [priceHigh, setPriceHigh] = useState(49)
-    const [day, setDay] = useState('allDays')
     const [time, setTime] = useState(null)
+    const [day, setDay] = useState('allDays')
     const [dietary, setDietary] = useState('all')
 
     const handleSubmit = async (e) => {
@@ -112,6 +112,15 @@ const SearchForm = () => {
             />
           {/* </Form.Group> */}
           <br />
+          <div class='label'><strong>Time</strong></div>
+            <Dropdown
+              // value={time}
+              fluid search selection
+              options={timeOptions}
+              placeholder="Time"
+              onChange={(e, {value}) => {setTime(value)}}
+            />
+          <br />
           <div class='label'><strong>Day</strong></div>
             <Dropdown
               // value={day}
@@ -120,15 +129,6 @@ const SearchForm = () => {
               options={dayOptions}
               placeholder="All Days"
               onChange={(e, {value}) => {setDay(value)}}
-            />
-          <br />
-          <div class='label'><strong>Time</strong></div>
-            <Dropdown
-              // value={time}
-              fluid search selection
-              options={timeOptions}
-              placeholder="Time"
-              onChange={(e, {value}) => {setTime(value)}}
             />
           <br />
           <div class='label'><strong>Dietary Needs</strong></div>
@@ -150,7 +150,7 @@ const SearchForm = () => {
         </Form>
         <Divider hidden />
         <strong>onChange:</strong>
-        <pre>{JSON.stringify({ priceLow, priceHigh, day, time, dietary }, null, 2)}</pre>
+        <pre>{JSON.stringify({ priceLow, priceHigh, time, day, dietary }, null, 2)}</pre>
       </>
     )
   }
