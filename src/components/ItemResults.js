@@ -8,11 +8,14 @@ function MenuItemResults ({ data, count }) {
         {!data 
         ? (
             <Container>
-            <Divider hidden />
+            <div class="results">
+            {/* <Divider hidden /> */}
         
-            <Header as="h1" dividing>
-                RESULTS
+            <Header as="h1">
+                Results
             </Header>
+            {/* <Divider hidden /> */}
+            </div>
             </Container>)
         : (
             <List>

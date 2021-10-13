@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from 'mapbox-gl';
 import axios from 'axios';
-import { Divider } from "semantic-ui-react";
+import { Divider, Container } from "semantic-ui-react";
+import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsc2hlYXJpbiIsImEiOiJja3U1bmZteXAwcmttMnBtcmpmYmRvc3FxIn0.4A5oFR0BXqoK60ppEgngJQ';
@@ -9,9 +10,9 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsc2hlYXJpbiIsImEiOiJja3U1bmZteXAwcmttM
 
 const Map = () => {
   const mapContainerRef = useRef(null);
-  const [lng, setLng] = useState(-82.5540);
-  const [lat, setLat] = useState(35.5946);
-  const [zoom, setZoom] = useState(12);
+  const [lng, setLng] = useState(-82.57);
+  const [lat, setLat] = useState(35.593);
+  const [zoom, setZoom] = useState(13);
 
   // Initialize map when component mounts
   useEffect(() => {
@@ -28,13 +29,22 @@ const Map = () => {
       const restaurants = response.data
       restaurants.map((restaurant) => {
         const coordinates = [(restaurant.longitude), (restaurant.latitude)]
-          new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
+        new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
         });
   })
+  
+
+  const directions = new MapboxDirections({
+    accessToken: mapboxgl.accessToken,
+    unit: 'imperial',
+    profile: 'mapbox/driving'
+  });
+  map.addControl(directions, 'top-left');
     
 
     // Add navigation control (the +/- zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
 
     map.on('move', () => {
       setLng(map.getCenter().lng.toFixed(4));
@@ -42,15 +52,17 @@ const Map = () => {
       setZoom(map.getZoom().toFixed(2));
     });
 
+
+
     // Clean up on unmount
     return () => map.remove();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div>
+    <Container>
       <div className="map-container" ref={mapContainerRef} />
       <Divider hidden/>
-    </div>
+    </Container>
   );
 };
 

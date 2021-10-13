@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux";
 import { Container, Divider, Header, Message } from "semantic-ui-react";
+// import SearchForm from './SearchForm.js';
 import SearchForm from './SearchForm.js';
 
 const TopBar = props => (
@@ -30,29 +31,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(TopBar);
-
-
-
-
-
-
-
-  // return (
-
-    // <div><h2>FIVE DOLLAR LUNCH</h2>
-
-
-
-
-    /* <ul><li><LowPrice /></li><li><HighPrice /></li><li><Time /></li><li><Day /></li
-    </ul> */
-
-
-    // <Map />
-    // </div>
-
-
-//   )
-// }
-
-// export default Header;

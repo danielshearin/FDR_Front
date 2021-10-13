@@ -1,25 +1,9 @@
-import React, { Fragment } from "react";
-import { Field, reduxForm } from "redux-form";
-// import { Form, Field } from 'react-final-form';
-import { Form } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Form, Dropdown, Divider, Button, Container } from "semantic-ui-react";
 import _ from 'lodash';
-import RestResults from "./RestResults";
 import axios from "axios";
-
-
-
-
-    
-const renderSelect = (field) => (
-    <Form.Select
-        label={field.label}
-        name={field.input.name}
-        onChange={(e, { value }) => field.input.onChange(value)}
-        options={field.options}
-        placeholder={field.placeholder}
-        value={field.input.value}
-    />
-);
+import RestResults from "./RestResults";
+import MenuItemResults from "./ItemResults";
 
 const getOptions = (number, prefix = 'Choice ') =>
     _.times(number, (index) => ({
@@ -42,14 +26,16 @@ const dayOptions=[
     { key: 'su', text: 'Sunday', value: 'sunday' }
 ]
 
+
 const dietaryOptions=[
     { key: 'all', text: 'No Restrictions', value: 'all' },
     { key: 'vegetarian', text: 'vegetarian', value: 'vegetarian' },
     { key: 'vegan', text: 'vegan', value: 'vegan' },
-    { key: 'glueten-free', text: 'glueten-free', value: 'glueten-free' },
-    { key: 'vegetarian_and_gluten-free', text: 'vegetarian and gluten-free', value: 'vegetarian_and_luten-free' },
-    { key: 'vegan_and_gluten-free', text: 'vegan and gluten-free', value: 'vegan_and_gluten-free' }
+    { key: 'glueten-free', text: 'gluten-free', value: 'glueten-free' },
+    // { key: 'vegetarian_and_gluten-free', text: 'vegetarian and gluten-free', value: 'vegetarian_and_luten-free' },
+    // { key: 'vegan_and_gluten-free', text: 'vegan and gluten-free', value: 'vegan_and_gluten-free' }
 ]
+
 
 const timeOptions=[
     { key: '5 am', text: '5 am', value: '5' },
@@ -79,59 +65,111 @@ const timeOptions=[
 ]
 
 
-const SearchForm = props => {
-    const { handleSubmit, reset } = props;
 
+
+const SearchForm = () => {
+  // const [result, setResult] = useState()
+  // const [count, setCount] = useState(0)
+    const [priceLow, setPriceLow] = useState(1)
+    const [priceHigh, setPriceHigh] = useState(49)
+    const [time, setTime] = useState(null)
+    const [day, setDay] = useState('allDays')
+    const [dietary, setDietary] = useState('all')
+
+    const handleSubmit = async (e) => {
+      try {
+        e.preventDefault()
+
+        const data = {
+          "price_low":priceLow,
+          "price_high":priceHigh,
+          "time":time,
+          "day":day,
+          "dietary":dietary 
+        }
+        const newMenuItemSearch = await axios.post("/api/searchitems", data)
+        .then(response => console.log(newMenuItemSearch.data))
+
+
+
+        // const result = await axios
+        //   .get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)
+      } catch (error) {
+        console.error(error.message)
+      }
+    }
+
+// Using Semantic UI for forms and dropdown menus
     return (
-        <Fragment>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group inline widths="equal">
-                    <Field
-                        label="Price Low"
-                        component={renderSelect}
-                        name="priceLow"
-                        selection
-                        options={getOptions(50, '')}
-                        placeholder={1}
-                    />
-                    <Field
-                        label="Price High"
-                        component={renderSelect}
-                        name="priceHigh"
-                        selection
-                        options={getOptions(50, '')}
-                        placeholder={49}
-                    />
-                    <Field
-                        label="Day"
-                        component={renderSelect}
-                        name="day"                    
-                        fluid multiple selection options={dayOptions}
-                        placeholder="All Days"
-                    />
-                    <Field
-                        label="Time"
-                        component={renderSelect}
-                        name="time"                    
-                        options={timeOptions}
-                        placeholder="Time"
-                    />
-                    <Field
-                        label="Dietary Restrictions"
-                        component={renderSelect}
-                        name="dietary"                    
-                        fluid multiple selection options={dietaryOptions}
-                        placeholder="No Restrictions"
-                    />
+      <>
+      <Container>
+        <Form class="form" onSubmit={handleSubmit}>
+          {/* <Form.Group inline widths='equal'> */}
+          <div class='label'><strong>Price Low $</strong></div>
+            <Dropdown
+              placeholder='1'
+              // value={priceLow}
+              fluid search selection
+              options={getOptions(50, '')}
+              onChange={(e, {value}) => {setPriceLow(value)}}
+            />
+          <br />
+          <div class='label'><strong>Price High $</strong></div>
+            <Dropdown
+              label='Price High'
+              placeholder='49'
+              // value={priceHigh}
+              fluid search selection
+              options={getOptions(50, '')}
+              onChange={(e, {value}) => {setPriceHigh(value)}}
+            />
+          {/* </Form.Group> */}
+          <br />
+          <div class='label'><strong>Time</strong></div>
+            <Dropdown
+              // value={time}
+              fluid search selection
+              options={timeOptions}
+              placeholder="Time"
+              onChange={(e, {value}) => {setTime(value)}}
+            />
+          <br />
+          <div class='label'><strong>Day</strong></div>
+            <Dropdown
+              // value={day}
+              fluid search selection
+              fluid multiple selection
+              options={dayOptions}
+              placeholder="All Days"
+              onChange={(e, {value}) => {setDay(value)}}
+            />
+          <br />
+          <div class='label'><strong>Dietary Needs</strong></div>
+            <Dropdown
+              label='Dietary Restrictions'
+              // value={dietary}
+              placeholder='No Restrictions'
+              fluid search selection
+              fluid multiple selection
+              options={dietaryOptions}
+              onChange={(e, {value}) => {setDietary(value)}}
+            />
+            <br />
+          
+          <Divider hidden />
+          <Button type='submit' class='button'>GO</Button>
 
-                    <Form.Button primary onClick={handleSubmit}>GO</Form.Button>
-                    <Form.Button onClick={reset}>Reset</Form.Button>
-                </Form.Group>
-            </Form>
-        </Fragment>
-    );
-};
+          <Divider hidden />
+        </Form>
+        <Divider hidden />
+        
+        <strong>onChange:</strong>
+        <pre>{JSON.stringify({ priceLow, priceHigh, time, day, dietary }, null, 2)}</pre>
+      </Container>
+      </>
+    )
+  }
 
-export default reduxForm({
-    form: "profile"
-})(SearchForm);
+
+
+export default SearchForm
