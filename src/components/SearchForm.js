@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Dropdown, Divider, Button } from "semantic-ui-react";
+import { Form, Dropdown, Divider, Button, Container } from "semantic-ui-react";
 import _ from 'lodash';
 import axios from "axios";
 import RestResults from "./RestResults";
@@ -79,9 +79,21 @@ const SearchForm = () => {
     const handleSubmit = async (e) => {
       try {
         e.preventDefault()
-        const result = await axios
-          .get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)
-          // .get(`/api/menuitems`)
+
+        const data = {
+          "price_low":priceLow,
+          "price_high":priceHigh,
+          "time":time,
+          "day":day,
+          "dietary":dietary 
+        }
+        const newMenuItemSearch = await axios.post("/api/searchitems", data)
+        .then(response => console.log(newMenuItemSearch.data))
+
+
+
+        // const result = await axios
+        //   .get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)
       } catch (error) {
         console.error(error.message)
       }
@@ -90,6 +102,7 @@ const SearchForm = () => {
 // Using Semantic UI for forms and dropdown menus
     return (
       <>
+      <Container>
         <Form class="form" onSubmit={handleSubmit}>
           {/* <Form.Group inline widths='equal'> */}
           <div class='label'><strong>Price Low $</strong></div>
@@ -149,8 +162,10 @@ const SearchForm = () => {
           <Divider hidden />
         </Form>
         <Divider hidden />
+        
         <strong>onChange:</strong>
         <pre>{JSON.stringify({ priceLow, priceHigh, time, day, dietary }, null, 2)}</pre>
+      </Container>
       </>
     )
   }

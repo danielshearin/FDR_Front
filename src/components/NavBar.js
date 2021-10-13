@@ -1,7 +1,7 @@
 import React from 'react'
 // import { connect } from "react-redux";
 import { Container, Divider, Header, Message } from "semantic-ui-react";
-import SearchForm from './SearchForm.js';
+// import SearchForm from './SearchForm.js';
 
 const NavBar = props => (
   <Container>
@@ -14,9 +14,9 @@ const NavBar = props => (
     </Header>
     <Divider hidden />
   </div>
-    <SearchForm onSubmit={() => console.log("SeachForm was submitted")} />
+    {/* <SearchForm onSubmit={() => console.log("SeachForm was submitted")} />
 
-    <Divider hidden />
+    <Divider hidden /> */}
   </Container>
 );
 
