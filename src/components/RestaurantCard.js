@@ -1,12 +1,16 @@
 import React from 'react';
+import { Container, Divider } from 'semantic-ui-react';
 
 const RestaurantCard = props => {
-    const {id, item, restaurant, price, description, day, dietary, open_time, close_time } = props
+    const {id, name, city, street, zip, phone, longitude, latitude, coordinates } = props
 
     return (
         <>
             <div>
-                <p>{id}
+                <Container>
+                <h3>{name}</h3>
+                {/* <p>
+                {id}
                 {item}
                 {restaurant}
                 {price}
@@ -14,7 +18,9 @@ const RestaurantCard = props => {
                 {day}
                 {dietary}
                 {open_time}
-                {close_time}</p>
+                {close_time}
+                </p> */}
+                </Container>
             </div>
         </>
     )

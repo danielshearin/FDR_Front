@@ -1,41 +1,34 @@
 import React from "react";
 import MenuItemCard from "./MenuItemCard";
-import { Header, List, Divider, Container } from "semantic-ui-react";
+import { Header, Divider, Container } from "semantic-ui-react";
+import RestaurantCard from "./RestaurantCard";
 
 function MenuItemResults ({ data }) {
     return (
         <>
         {!data 
         ? (
-            <Container>
-            <div class="results">
-            {/* <Divider hidden /> */}
-        
-            <Header as="h1">
-                Results
-            </Header>
-            {/* <Divider hidden /> */}
-            </div>
-            </Container>)
+            <p> </p>)
         : (
-            <List>
-                {/* <Header>{count} Results Found</Header> */}
-                <Header>Results:</Header>
+            <Container>
             <br />
             {data.map((item) => {
                 return (
+                    <>
+                    <RestaurantCard 
+                        name={item.restaurant.name}
+                        />
                     <MenuItemCard
-                        id={item.id}
-                        restaurant={item.restaurant}
                         item={item.item}
                         price={item.price}
                         description={item.description}
                         dietary={item.dietary}
                     />
+                    </>
                 )
             }            
             )}
-            </List>
+            </Container>
         )}
         </>
     )

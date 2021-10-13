@@ -5,6 +5,8 @@ import axios from "axios";
 import RestResults from "./RestResults";
 import MenuItemResults from "./ItemResults";
 import Map from "./Map";
+import RestaurantCard from "./RestaurantCard";
+import ResultBar from "./ResultBar";
 
 
 const getOptions = (number, prefix = 'Choice ') =>
@@ -70,9 +72,8 @@ const timeOptions=[
 
 
 const SearchForm = () => {
-    const [result, setResult] = useState()
-    const [searchData, setSearchData] = useState()
-  // const [count, setCount] = useState(0)
+    const [restResult, setRestResult] = useState()
+    const [itemResult, setItemResult] = useState()
     const [priceLow, setPriceLow] = useState(1)
     const [priceHigh, setPriceHigh] = useState(49)
     const [time, setTime] = useState(null)
@@ -90,10 +91,29 @@ const SearchForm = () => {
           "day":day,
           "dietary":dietary 
         }
+        
+        const searchResult = await axios.post("/api/searchitems", data)
+        setItemResult(searchResult.data)
+        itemResult.map((item) => {
+          setRestResult(item.restaurant)
+              console.log(item.restaurant)
+        })
+        
+        console.log(restResult)
 
-        const result = await axios.post("/api/searchitems", data)
-        setResult(result.data)
-        console.log(result)
+
+
+
+        // const restaurants = await axios.post("/api/searchitems", data)
+        // .then(response => {
+        //   const restaurants = response.data
+        //     restaurants.map((restaurant) => {
+        //       setRestResult(restaurant.restaurant)
+        //       console.log(restResult)
+        //     })
+        //     })
+
+
 
         // setSearchData(response.data)
         // .then(response => {
@@ -116,39 +136,37 @@ const SearchForm = () => {
       <>
       <Container>
         <Form class="form" onSubmit={handleSubmit}>
-          {/* <Form.Group inline widths='equal'> */}
+
           <div class='label'><strong>Price Low $</strong></div>
             <Dropdown
               placeholder='1'
-              // value={priceLow}
               fluid search selection
               options={getOptions(50, '')}
               onChange={(e, {value}) => {setPriceLow(value)}}
             />
           <br />
+
           <div class='label'><strong>Price High $</strong></div>
             <Dropdown
               label='Price High'
               placeholder='49'
-              // value={priceHigh}
               fluid search selection
               options={getOptions(50, '')}
               onChange={(e, {value}) => {setPriceHigh(value)}}
             />
-          {/* </Form.Group> */}
           <br />
+
           <div class='label'><strong>Time</strong></div>
             <Dropdown
-              // value={time}
               fluid search selection
               options={timeOptions}
               placeholder="Time"
               onChange={(e, {value}) => {setTime(value)}}
             />
           <br />
+
           <div class='label'><strong>Day</strong></div>
             <Dropdown
-              // value={day}
               fluid search selection
               fluid multiple selection
               options={dayOptions}
@@ -156,10 +174,10 @@ const SearchForm = () => {
               onChange={(e, {value}) => {setDay(value)}}
             />
           <br />
+
           <div class='label'><strong>Dietary Needs</strong></div>
             <Dropdown
               label='Dietary Restrictions'
-              // value={dietary}
               placeholder='No Restrictions'
               fluid search selection
               fluid multiple selection
@@ -179,11 +197,12 @@ const SearchForm = () => {
         <pre>{JSON.stringify({ priceLow, priceHigh, time, day, dietary }, null, 2)}</pre> */}
       </Container>
       <Map />
-      <MenuItemResults data={result} />
+      <ResultBar />
+      <RestaurantCard data={restResult}/>
+      <MenuItemResults data={itemResult} />
       </>
     )
   }
-
 
 
 export default SearchForm
