@@ -8,8 +8,9 @@ const MenuItemCard = props => {
         <>
         <Container id={id}>
             <Segment>
-                <Header>{item}{price}</Header>
-                <p>{description}{dietary}</p>
+                <h3>{item} ${price}</h3>
+                <p>{description}</p>
+                <p>{dietary}</p>
             </Segment>
         </Container>
         </>

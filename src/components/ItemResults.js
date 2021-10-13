@@ -2,7 +2,7 @@ import React from "react";
 import MenuItemCard from "./MenuItemCard";
 import { Header, List, Divider, Container } from "semantic-ui-react";
 
-function MenuItemResults ({ data, count }) {
+function MenuItemResults ({ data }) {
     return (
         <>
         {!data 
@@ -19,12 +19,14 @@ function MenuItemResults ({ data, count }) {
             </Container>)
         : (
             <List>
-                <Header>{count} Results Found</Header>
+                {/* <Header>{count} Results Found</Header> */}
+                <Header>Results:</Header>
             <br />
             {data.map((item) => {
                 return (
                     <MenuItemCard
                         id={item.id}
+                        restaurant={item.restaurant}
                         item={item.item}
                         price={item.price}
                         description={item.description}

@@ -4,6 +4,8 @@ import _ from 'lodash';
 import axios from "axios";
 import RestResults from "./RestResults";
 import MenuItemResults from "./ItemResults";
+import Map from "./Map";
+
 
 const getOptions = (number, prefix = 'Choice ') =>
     _.times(number, (index) => ({
@@ -68,7 +70,8 @@ const timeOptions=[
 
 
 const SearchForm = () => {
-  // const [result, setResult] = useState()
+    const [result, setResult] = useState()
+    const [searchData, setSearchData] = useState()
   // const [count, setCount] = useState(0)
     const [priceLow, setPriceLow] = useState(1)
     const [priceHigh, setPriceHigh] = useState(49)
@@ -87,13 +90,22 @@ const SearchForm = () => {
           "day":day,
           "dietary":dietary 
         }
-        const newMenuItemSearch = await axios.post("/api/searchitems", data)
-        .then(response => console.log(newMenuItemSearch.data))
 
+        const result = await axios.post("/api/searchitems", data)
+        setResult(result.data)
+        console.log(result)
 
+        // setSearchData(response.data)
+        // .then(response => {
+        //   newMenuItemSearch = response.data
+        //   console.log(newMenuItemSearch)
+        // })
 
         // const result = await axios
-        //   .get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)
+        //   .get(`/api/searchitems`)
+        //   console.log(result)
+        //   setResult(result.data)
+          /*.get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)*/
       } catch (error) {
         console.error(error.message)
       }
@@ -163,9 +175,11 @@ const SearchForm = () => {
         </Form>
         <Divider hidden />
         
-        <strong>onChange:</strong>
-        <pre>{JSON.stringify({ priceLow, priceHigh, time, day, dietary }, null, 2)}</pre>
+        {/* <strong>onChange:</strong>
+        <pre>{JSON.stringify({ priceLow, priceHigh, time, day, dietary }, null, 2)}</pre> */}
       </Container>
+      <Map />
+      <MenuItemResults data={result} />
       </>
     )
   }

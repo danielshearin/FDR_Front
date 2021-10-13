@@ -13,6 +13,7 @@ const Map = () => {
   const [lng, setLng] = useState(-82.57);
   const [lat, setLat] = useState(35.593);
   const [zoom, setZoom] = useState(13);
+  // const { data } = props
 
   // Initialize map when component mounts
   useEffect(() => {
@@ -32,7 +33,8 @@ const Map = () => {
         new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
         });
   })
-  
+
+
 
   const directions = new MapboxDirections({
     accessToken: mapboxgl.accessToken,

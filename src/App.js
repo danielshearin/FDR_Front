@@ -10,8 +10,8 @@ function App () {
     <div>
       <NavBar />
       <SearchForm />
-      <Map />
-      <MenuItemResults />
+      {/* <Map />
+      <MenuItemResults /> */}
     </div>
   )
 }
