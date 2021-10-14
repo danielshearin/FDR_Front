@@ -8,7 +8,7 @@ import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsc2hlYXJpbiIsImEiOiJja3U1bmZteXAwcmttMnBtcmpmYmRvc3FxIn0.4A5oFR0BXqoK60ppEgngJQ';
 
 
-const Map = () => {
+function Map ({ data }) {
   const mapContainerRef = useRef(null);
   const [lng, setLng] = useState(-82.57);
   const [lat, setLat] = useState(35.593);
@@ -24,18 +24,27 @@ const Map = () => {
       zoom: zoom,
     });
 
-// Place Default Markers
-    const restaurants = axios.get("/api/restaurants")
-    .then(response => {
-      const restaurants = response.data
-      restaurants.map((restaurant) => {
-        const coordinates = [(restaurant.longitude), (restaurant.latitude)]
-        new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
-        });
-  })
+
+    // !data
+    //   ? (
+      
+      // Place Default Markers
+    //   const restaurants = axios.get("/api/restaurants")
+    //   .then(response => {
+    //     const restaurants = response.data
+    //     restaurants.map((restaurant) => {
+    //       const coordinates = [(restaurant.longitude), (restaurant.latitude)]
+    //       new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
+    //       });
+    // })
+    // )
+    // : (
+  // Place New Markers for Search Results (needs work)
+      // new mapboxgl.Marker().setLngLat(data).addTo(map)
+    // )}
 
 
-
+    
   const directions = new MapboxDirections({
     accessToken: mapboxgl.accessToken,
     unit: 'imperial',

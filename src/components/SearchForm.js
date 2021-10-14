@@ -7,6 +7,8 @@ import MenuItemResults from "./ItemResults";
 import Map from "./Map";
 import RestaurantCard from "./RestaurantCard";
 import ResultBar from "./ResultBar";
+import mapboxgl from 'mapbox-gl';
+import { appendToMemberExpression } from "@babel/types";
 
 
 const getOptions = (number, prefix = 'Choice ') =>
@@ -72,137 +74,180 @@ const timeOptions=[
 
 
 const SearchForm = () => {
-    const [restResult, setRestResult] = useState()
-    const [itemResult, setItemResult] = useState()
-    const [priceLow, setPriceLow] = useState(1)
-    const [priceHigh, setPriceHigh] = useState(49)
-    const [time, setTime] = useState(null)
-    const [day, setDay] = useState('allDays')
-    const [dietary, setDietary] = useState('all')
 
-    const handleSubmit = async (e) => {
-      try {
-        e.preventDefault()
+//TRY 1
+  // const restaurants = axios.get("/api/restaurants")
+  // .then(response => {
+  //   const restaurants = response.data
+  //   restaurants.map((restaurant) => {
+  //       const restaurants = [(restaurant.longitude), (restaurant.latitude)]
+  //     }
+  //     )
+  // });
 
-        const data = {
-          "price_low":priceLow,
-          "price_high":priceHigh,
-          "time":time,
-          "day":day,
-          "dietary":dietary 
-        }
-        
-        const searchResult = await axios.post("/api/searchitems", data)
-        setItemResult(searchResult.data)
-        itemResult.map((item) => {
-          setRestResult(item.restaurant)
-              console.log(item.restaurant)
-        })
-        
-        console.log(restResult)
+  // const [restCoords, setRestCoords] = useState(restaurants)
 
+// TRY 2
+  // const [restCoords, setRestCoords] = useState(axios.get("/api/restaurants")
+  // .then(response => {
+  //   const restaurants = response.data
+  //   restaurants.map((restaurant) => {
+  //       const coordinates = [(restaurant.longitude), (restaurant.latitude)]
+  //       return coordinates
+  //     }
+  //     )
+  // }))
 
+  // TRY 3
+  const [restCoords, setRestCoords] = useState()
 
-
-        // const restaurants = await axios.post("/api/searchitems", data)
-        // .then(response => {
-        //   const restaurants = response.data
-        //     restaurants.map((restaurant) => {
-        //       setRestResult(restaurant.restaurant)
-        //       console.log(restResult)
-        //     })
-        //     })
-
-
-
-        // setSearchData(response.data)
-        // .then(response => {
-        //   newMenuItemSearch = response.data
-        //   console.log(newMenuItemSearch)
-        // })
-
-        // const result = await axios
-        //   .get(`/api/searchitems`)
-        //   console.log(result)
-        //   setResult(result.data)
-          /*.get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)*/
-      } catch (error) {
-        console.error(error.message)
+  axios.get("/api/restaurants")
+  .then(response => {
+    const coordinateArray = []
+    const restaurants = response.data
+    restaurants.map((restaurant) => {
+        const coordinates = [(restaurant.longitude), (restaurant.latitude)]
+        coordinateArray.push(coordinates)
+        setRestCoords(coordinateArray)
       }
-    }
+      )
+  });
 
-// Using Semantic UI for forms and dropdown menus
-    return (
-      <>
-      <Container>
-        <Form class="form" onSubmit={handleSubmit}>
+  console.log(restCoords)
 
-          <div class='label'><strong>Price Low $</strong></div>
-            <Dropdown
-              placeholder='1'
-              fluid search selection
-              options={getOptions(50, '')}
-              onChange={(e, {value}) => {setPriceLow(value)}}
-            />
-          <br />
+  const [restResult, setRestResult] = useState()
+  const [itemResult, setItemResult] = useState()
+  const [priceLow, setPriceLow] = useState(1)
+  const [priceHigh, setPriceHigh] = useState(49)
+  const [time, setTime] = useState(null)
+  const [day, setDay] = useState('allDays')
+  const [dietary, setDietary] = useState('all')
+  
 
-          <div class='label'><strong>Price High $</strong></div>
-            <Dropdown
-              label='Price High'
-              placeholder='49'
-              fluid search selection
-              options={getOptions(50, '')}
-              onChange={(e, {value}) => {setPriceHigh(value)}}
-            />
-          <br />
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault()
 
-          <div class='label'><strong>Time</strong></div>
-            <Dropdown
-              fluid search selection
-              options={timeOptions}
-              placeholder="Time"
-              onChange={(e, {value}) => {setTime(value)}}
-            />
-          <br />
+      const data = {
+        "price_low":priceLow,
+        "price_high":priceHigh,
+        "time":time,
+        "day":day,
+        "dietary":dietary 
+      }
 
-          <div class='label'><strong>Day</strong></div>
-            <Dropdown
-              fluid search selection
-              fluid multiple selection
-              options={dayOptions}
-              placeholder="All Days"
-              onChange={(e, {value}) => {setDay(value)}}
-            />
-          <br />
 
-          <div class='label'><strong>Dietary Needs</strong></div>
-            <Dropdown
-              label='Dietary Restrictions'
-              placeholder='No Restrictions'
-              fluid search selection
-              fluid multiple selection
-              options={dietaryOptions}
-              onChange={(e, {value}) => {setDietary(value)}}
-            />
-            <br />
-          
-          <Divider hidden />
-          <Button type='submit' class='button'>GO</Button>
+      
+      const searchResult = await axios.post("/api/searchitems", data)
+        setItemResult(searchResult.data)
+        console.log(itemResult)
+// Create restaurant card
+        // itemResult.map((item) => {
+        //   setRestResult(item.restaurant)
+        //       console.log(item.restaurant)
+        // })
+      
+      // console.log(restResult)
 
-          <Divider hidden />
-        </Form>
-        <Divider hidden />
+      itemResult.map((item) => {
+        const coordinates = [(item.restaurant.longitude),(item.restaurant.latitude)]
+        setRestCoords(coordinates)
+        console.log(restCoords)
+
+        // new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
+      });
+
+// OLD CODE, potentially useful
+      // const restaurants = await axios.post("/api/searchitems", data)
+      // .then(response => {
+      //   const restaurants = response.data
+      //     restaurants.map((restaurant) => {
+      //       setRestResult(restaurant.restaurant)
+      //       console.log(restResult)
+      //     })
+      //     })
+
+
+        /*.get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)*/
         
-        {/* <strong>onChange:</strong>
-        <pre>{JSON.stringify({ priceLow, priceHigh, time, day, dietary }, null, 2)}</pre> */}
-      </Container>
-      <Map />
-      <ResultBar />
-      <RestaurantCard data={restResult}/>
-      <MenuItemResults data={itemResult} />
-      </>
-    )
+    } catch (error) {
+      console.error(error.message)
+    }
   }
 
+
+  return (
+    <>
+    <Container>
+      <Form class="form" onSubmit={handleSubmit}>
+
+        <div class='label'><strong>Price Low $</strong></div>
+          <Dropdown
+            placeholder='1'
+            fluid search selection
+            options={getOptions(50, '')}
+            onChange={(e, {value}) => {setPriceLow(value)}}
+          />
+        <br />
+
+        <div class='label'><strong>Price High $</strong></div>
+          <Dropdown
+            label='Price High'
+            placeholder='49'
+            fluid search selection
+            options={getOptions(50, '')}
+            onChange={(e, {value}) => {setPriceHigh(value)}}
+          />
+        <br />
+
+        <div class='label'><strong>Time</strong></div>
+          <Dropdown
+            fluid search selection
+            options={timeOptions}
+            placeholder="Time"
+            onChange={(e, {value}) => {setTime(value)}}
+          />
+        <br />
+
+        <div class='label'><strong>Day</strong></div>
+          <Dropdown
+            fluid search selection
+            fluid multiple selection
+            options={dayOptions}
+            placeholder="All Days"
+            onChange={(e, {value}) => {setDay(value)}}
+          />
+        <br />
+
+        <div class='label'><strong>Dietary Needs</strong></div>
+          <Dropdown
+            label='Dietary Restrictions'
+            placeholder='No Restrictions'
+            fluid search selection
+            fluid multiple selection
+            options={dietaryOptions}
+            onChange={(e, {value}) => {setDietary(value)}}
+          />
+          <br />
+        
+        <Divider hidden />
+        <Button type='submit' class='button'>GO</Button>
+
+        <Divider hidden />
+      </Form>
+      <Divider hidden />
+      
+{/* CHECKS SEARCH DATA */}
+      {/* <strong>onChange:</strong>
+      <pre>{JSON.stringify({ priceLow, priceHigh, time, day, dietary }, null, 2)}</pre> */}
+
+    </Container>
+    {/* <Map data={restResult}/> */}
+    <Map data={restCoords} />
+    <ResultBar />
+    <MenuItemResults data={itemResult} />
+    </>
+  )
+}
 
 export default SearchForm

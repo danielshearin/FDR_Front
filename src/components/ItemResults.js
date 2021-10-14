@@ -8,7 +8,7 @@ function MenuItemResults ({ data }) {
         <>
         {!data 
         ? (
-            <p> </p>)
+            <p>:)</p>)
         : (
             <Container>
             <br />
@@ -22,8 +22,7 @@ function MenuItemResults ({ data }) {
                         item={item.item}
                         price={item.price}
                         description={item.description}
-                        dietary={item.dietary}
-                    />
+                        dietary={item.dietary}/>
                     </>
                 )
             }            

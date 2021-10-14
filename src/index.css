@@ -24,7 +24,8 @@ code {
 
 .ui.search.dropdown>.text {
   font-weight: bold;
-  color:#4d8a8a;
+  /* color:#4d8a8a; */
+  color:#6b85b4;
 }
 
 .ui.dropdown:not(.button)>.default.text {
@@ -40,7 +41,8 @@ code {
 }
 
 .ui.label {
-  color:#4d8a8a;
+  /* color:#4d8a8a; */
+  color:#5d75a3;
   background-color: #ffffff;
   font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
 }
@@ -91,6 +93,15 @@ code {
   border-radius: 12px;
 }
 
+.restaurant_name {
+  color: #6b85b4f1;
+  width: 10em;
+  height: auto;
+  border-radius: 12px;
+  padding-left: 0px;
+  padding-top: 7px;
+  margin: 5px 0;
+}
 .results {
   color: #21232c;
   background-color: #ecaf3c;
