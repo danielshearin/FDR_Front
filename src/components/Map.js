@@ -9,6 +9,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsc2hlYXJpbiIsImEiOiJja3U1bmZteXAwcmttM
 
 
 function Map ({ data }) {
+  console.log( {data})
   const mapContainerRef = useRef(null);
   const [lng, setLng] = useState(-82.57);
   const [lat, setLat] = useState(35.593);
@@ -25,32 +26,68 @@ function Map ({ data }) {
     });
 
 
-    // !data
-    //   ? (
-      
-      // Place Default Markers
-    //   const restaurants = axios.get("/api/restaurants")
-    //   .then(response => {
-    //     const restaurants = response.data
-    //     restaurants.map((restaurant) => {
-    //       const coordinates = [(restaurant.longitude), (restaurant.latitude)]
-    //       new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
-    //       });
-    // })
-    // )
-    // : (
-  // Place New Markers for Search Results (needs work)
-      // new mapboxgl.Marker().setLngLat(data).addTo(map)
-    // )}
-
+// MARKERS
+    let restaurants
+    var markers = [];
 
     
-  const directions = new MapboxDirections({
-    accessToken: mapboxgl.accessToken,
-    unit: 'imperial',
-    profile: 'mapbox/driving'
-  });
-  map.addControl(directions, 'top-left');
+    const populateMakers = ({ data }) => {
+
+      return (
+        <>
+      {!data
+      ? (
+
+      // Place Default Markers
+      restaurants = axios.get("/api/restaurants")
+      .then(response => {
+        const restaurants = response.data
+        restaurants.map((restaurant) => {
+          const coordinates = [(restaurant.longitude), (restaurant.latitude)]
+          let marker = new mapboxgl.Marker()
+            .setLngLat(coordinates)
+            // .setPopup(new mapboxgl.Popup()
+            //   .setHTML())
+            .addTo(map);
+          markers.push(marker)
+          });
+      })
+      )
+      : (
+
+    // Place New Markers for Search Results (needs work)
+      <div>
+      {
+        function clearMarkers(){
+          markers.forEach((marker) => marker.remove());
+          markers = [];
+        },
+
+        function drawMarkers(data) {
+        // clearMarkers();
+        data.map((coordPair) => {
+        let marker = new mapboxgl.Marker()
+          .setLngLat(coordPair)
+          // .setPopup(new mapboxgl.Popup()
+          //   .setHTML())
+          .addTo(map);
+        markers.push(marker)
+      })}
+      }
+      </div>
+      )
+    }
+    </>
+      )
+    }
+    populateMakers( {data} );
+    
+    const directions = new MapboxDirections({
+      accessToken: mapboxgl.accessToken,
+      unit: 'imperial',
+      profile: 'mapbox/driving'
+    });
+    map.addControl(directions, 'top-left');
     
 
     // Add navigation control (the +/- zoom buttons)
@@ -76,6 +113,5 @@ function Map ({ data }) {
     </Container>
   );
 };
-
 
 export default Map

@@ -8,7 +8,7 @@ function MenuItemResults ({ data }) {
         <>
         {!data 
         ? (
-            <p>:)</p>)
+            <p></p>)
         : (
             <Container>
             <br />

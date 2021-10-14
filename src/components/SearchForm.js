@@ -101,19 +101,19 @@ const SearchForm = () => {
   // TRY 3
   const [restCoords, setRestCoords] = useState()
 
-  axios.get("/api/restaurants")
-  .then(response => {
-    const coordinateArray = []
-    const restaurants = response.data
-    restaurants.map((restaurant) => {
-        const coordinates = [(restaurant.longitude), (restaurant.latitude)]
-        coordinateArray.push(coordinates)
-        setRestCoords(coordinateArray)
-      }
-      )
-  });
+  // axios.get("/api/restaurants")
+  // .then(response => {
+  //   const coordinateArray = []
+  //   const restaurants = response.data
+  //   restaurants.map((restaurant) => {
+  //       const coordinates = [(restaurant.longitude), (restaurant.latitude)]
+  //       coordinateArray.push(coordinates)
+  //       setRestCoords(coordinateArray)
+  //     }
+  //     )
+  // });
 
-  console.log(restCoords)
+  // console.log(restCoords)
 
   const [restResult, setRestResult] = useState()
   const [itemResult, setItemResult] = useState()
@@ -148,15 +148,18 @@ const SearchForm = () => {
         // })
       
       // console.log(restResult)
-
-      itemResult.map((item) => {
+      
+      let array
+      const populateCoords = (
+        array = [],
+        itemResult.map((item) => {
         const coordinates = [(item.restaurant.longitude),(item.restaurant.latitude)]
-        setRestCoords(coordinates)
-        console.log(restCoords)
-
-        // new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
-      });
-
+        array.push(coordinates)
+      })
+      )
+      
+      setRestCoords(array)
+      console.log(restCoords)
 // OLD CODE, potentially useful
       // const restaurants = await axios.post("/api/searchitems", data)
       // .then(response => {
@@ -242,7 +245,6 @@ const SearchForm = () => {
       <pre>{JSON.stringify({ priceLow, priceHigh, time, day, dietary }, null, 2)}</pre> */}
 
     </Container>
-    {/* <Map data={restResult}/> */}
     <Map data={restCoords} />
     <ResultBar />
     <MenuItemResults data={itemResult} />
