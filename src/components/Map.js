@@ -26,7 +26,7 @@ function Map ( {data} ) {
       });
 
 
-  
+
     data.map((restaurant) => {
       const coordinates = [(restaurant.longitude), (restaurant.latitude)]
       let marker = new mapboxgl.Marker()
@@ -64,7 +64,7 @@ function Map ( {data} ) {
 
     // Clean up on unmount
     return () => map.remove();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Container>
