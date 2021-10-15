@@ -23,24 +23,69 @@ function Map ( {data} ) {
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [lng, lat],
       zoom: zoom,
-      });
+    });
+
+    
 
 
-  
-    data.map((restaurant) => {
-      const coordinates = [(restaurant.longitude), (restaurant.latitude)]
-      let marker = new mapboxgl.Marker()
-        .setLngLat(coordinates)
-        .setPopup(new mapboxgl.Popup()
-          .trackPointer()
-          .setHTML(`<h4>${restaurant.name}</h4>
-          <p>${restaurant.phone}<br />
-          ${restaurant.street}</p>
-          <img src=${restaurant.photo} maxWidth: "auto"> </img>`)
-          )
-        .addTo(map);
-      });
+// MARKERS
+    let restaurants
+    var markers = [];
 
+    const clearMarkers =() => {
+      markers.forEach((marker) => marker.remove());
+      console.log('markers cleared')
+      markers = [];
+    };
+    
+    const populateMakers = (data) => {
+
+      return (
+        <>
+      {!data
+      ? (
+        data.map((restaurant) => {
+          const coordinates = [(restaurant.longitude), (restaurant.latitude)]
+          let marker = new mapboxgl.Marker()
+            .setLngLat(coordinates)
+            .setPopup(new mapboxgl.Popup()
+              .trackPointer()
+              .setHTML(`<h4>${restaurant.name}</h4>
+              <p>${restaurant.phone}<br />
+              ${restaurant.street}</p>
+              <img src=${restaurant.photo} maxWidth: "auto"> </img>`)
+              )
+            .addTo(map);
+          markers.push(marker)
+          });
+      })
+      )
+      : (
+
+    // Place New Markers for Search Results (needs work)
+      <div>
+      {
+        function drawMarkers(data) {
+        clearMarkers();
+        data.map((coordPair) => {
+        let marker = new mapboxgl.Marker()
+          .setLngLat(coordPair)
+          // .setPopup(new mapboxgl.Popup()
+          //   .setHTML())
+          .addTo(map);
+        markers.push(marker)
+        console.log('new markers drawn')
+      })}
+      }
+      </div>
+      )
+    }
+    </>
+      )
+    }
+
+    populateMakers(data);
+    console.log(data)
     
     const directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken,

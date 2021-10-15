@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Dropdown, Divider, Button, Container } from "semantic-ui-react";
 import _ from 'lodash';
 import axios from "axios";
@@ -73,45 +73,19 @@ const timeOptions=[
 
 const SearchForm = () => {
 
-//TRY 1
-  // const restaurants = axios.get("/api/restaurants")
-  // .then(response => {
-  //   const restaurants = response.data
-  //   restaurants.map((restaurant) => {
-  //       const restaurants = [(restaurant.longitude), (restaurant.latitude)]
-  //     }
-  //     )
-  // });
+  //TRY 1
+  const [restaurant, setRestaurant] = useState(null)
 
-  // const [restCoords, setRestCoords] = useState(restaurants)
+  useEffect(() => {
+    axios.get("/api/restaurants")
+    .then(response => {
+      const restaurants = response.data
+      const coordinates = restaurants.map((restaurant) => [(restaurant.longitude), (restaurant.latitude)]
+      )
+      setRestaurant(restaurants)
+    });
 
-// TRY 2
-  // const [restCoords, setRestCoords] = useState(axios.get("/api/restaurants")
-  // .then(response => {
-  //   const restaurants = response.data
-  //   restaurants.map((restaurant) => {
-  //       const coordinates = [(restaurant.longitude), (restaurant.latitude)]
-  //       return coordinates
-  //     }
-  //     )
-  // }))
-
-  // TRY 3
-  const [restCoords, setRestCoords] = useState()
-
-  // axios.get("/api/restaurants")
-  // .then(response => {
-  //   const coordinateArray = []
-  //   const restaurants = response.data
-  //   restaurants.map((restaurant) => {
-  //       const coordinates = [(restaurant.longitude), (restaurant.latitude)]
-  //       coordinateArray.push(coordinates)
-  //       setRestCoords(coordinateArray)
-  //     }
-  //     )
-  // });
-
-  // console.log(restCoords)
+  }, [])
 
   const [restResult, setRestResult] = useState()
   const [itemResult, setItemResult] = useState()
@@ -148,16 +122,17 @@ const SearchForm = () => {
       // console.log(restResult)
       
       let array
-      const populateCoords = (
+      const populateRests = (
         array = [],
         itemResult.map((item) => {
-        const coordinates = [(item.restaurant.longitude),(item.restaurant.latitude)]
+        const coordinates = (item.restaurant)
         array.push(coordinates)
       })
       )
 
-      setRestCoords(array)
-      console.log(restCoords)
+      setRestaurant(array)
+      console.log('restaurant')
+      console.log(restaurant)
 
       // OLD CODE, potentially useful
       // const restaurants = await axios.post("/api/searchitems", data)
@@ -245,7 +220,7 @@ const SearchForm = () => {
       <pre>{JSON.stringify({ priceLow, priceHigh, time, day, dietary }, null, 2)}</pre> */}
 
     </Container>
-    <Map data={restCoords} />
+    {restaurant ? <Map data={restaurant} /> : ''}
     <ResultBar />
     <ItemResults data={itemResult} />
     </>
