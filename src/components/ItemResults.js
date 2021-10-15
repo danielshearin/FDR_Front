@@ -41,7 +41,7 @@ function ItemResults ({ data }) {
         .then(response => {
             const restDefault = response.data
             restDefault.map((restaurant) => {
-                defaultRestaurants.push(restaurant.name)
+                defaultRestaurants.push(restaurant)
             })
             // console.log('axios')
         })
@@ -56,14 +56,15 @@ function ItemResults ({ data }) {
 return (
     <>
         {!data 
-        ? (
-            <p>NO DATA</p>)
+        ? (         
+            <p>NO DATA</p>
+        )
             : (
                 handleSubmit(),
                 console.log('data passed in return'),
-                console.log(defaultRestaurants),
-                defaultRestaurants.map((restaurant) => {
-                    console.log('yessir restaurant')
+                // console.log(defaultRestaurants),
+                defaultRestaurants.map((name) => {
+                    console.log(name.name)
                 }),
             // console.log( {data} ),
             <Container>
@@ -73,7 +74,7 @@ return (
                 return (
                     <>                  
                     <RestaurantCard 
-                        name={restaurant}
+                        name={restaurant.name}
                         />
                     </>
                 )
