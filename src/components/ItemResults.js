@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MenuItemCard from "./MenuItemCard";
 import { Header, Divider, Container } from "semantic-ui-react";
 import RestaurantCard from "./RestaurantCard";
@@ -29,11 +29,14 @@ import axios from "axios";
 //             //     }
 // }
 
+
 function ItemResults ({ data }) {
 
-    let defaultRestaurants
+    // const [restaurant, setRestaurant] = useState()
+
+    const defaultRestaurants = []
+
     const handleSubmit = () => {
-        defaultRestaurants = []
         axios.get('api/restaurants')
         .then(response => {
             const restDefault = response.data
@@ -41,30 +44,31 @@ function ItemResults ({ data }) {
                 defaultRestaurants.push(restaurant.name)
             })
             // console.log('axios')
-            // console.log(defaultRestaurants)
-
         })
-        console.log('after axios')
-        console.log(defaultRestaurants)
-        // return defaultRestaurants
+        // setRestaurant(defaultRestaurants)
+        // console.log('after axios')
+        // console.log(defaultRestaurants)
+        return defaultRestaurants
 }
 
+// console.log(data)
 
-console.log(defaultRestaurants)
-console.log(data)
-
-    return (
-        <>
+return (
+    <>
         {!data 
         ? (
             <p>NO DATA</p>)
-        : (
-            handleSubmit(),
-            console.log('data passed in return'),
+            : (
+                handleSubmit(),
+                console.log('data passed in return'),
+                console.log(defaultRestaurants),
+                defaultRestaurants.map((restaurant) => {
+                    console.log('yessir restaurant')
+                }),
             // console.log( {data} ),
             <Container>
             <br />hi
-            {/* {defaultRestaurants.map((restaurant) => {
+            {defaultRestaurants.map((restaurant) => {
                 console.log('yes restaurant')
                 return (
                     <>                  
@@ -74,7 +78,7 @@ console.log(data)
                     </>
                 )
             }            
-            )} */}
+            )}
             </Container>
         )}
         </>

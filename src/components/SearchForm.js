@@ -113,7 +113,7 @@ const SearchForm = () => {
       const searchResult = await axios.post("/api/searchitems", data)
         setItemResult(searchResult.data)
         console.log(itemResult)
-// Create restaurant card
+//// Create restaurant card
         // itemResult.map((item) => {
         //   setRestResult(item.restaurant)
         //       console.log(item.restaurant)
@@ -131,8 +131,8 @@ const SearchForm = () => {
       )
 
       setRestaurant(array)
-      console.log('restaurant')
-      console.log(restaurant)
+      // console.log('restaurant')
+      // console.log(restaurant)
 
       // OLD CODE, potentially useful
       // const restaurants = await axios.post("/api/searchitems", data)

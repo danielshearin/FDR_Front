@@ -9,12 +9,11 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsc2hlYXJpbiIsImEiOiJja3U1bmZteXAwcmttM
 
 
 function Map ( {data} ) {
-  console.log(data)
+  // console.log(data)
   const mapContainerRef = useRef(null);
   const [lng, setLng] = useState(-82.57);
   const [lat, setLat] = useState(35.593);
   const [zoom, setZoom] = useState(13);
-  // const { data } = props
 
   // Initialize map when component mounts
   useEffect(() => {
