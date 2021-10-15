@@ -8,8 +8,8 @@ import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsc2hlYXJpbiIsImEiOiJja3U1bmZteXAwcmttMnBtcmpmYmRvc3FxIn0.4A5oFR0BXqoK60ppEgngJQ';
 
 
-function Map ({ data }) {
-  console.log( {data})
+function Map ( {data} ) {
+  console.log(data)
   const mapContainerRef = useRef(null);
   const [lng, setLng] = useState(-82.57);
   const [lat, setLat] = useState(35.593);
@@ -30,8 +30,13 @@ function Map ({ data }) {
     let restaurants
     var markers = [];
 
+    const clearMarkers =() => {
+      markers.forEach((marker) => marker.remove());
+      console.log('markers cleared')
+      markers = [];
+    };
     
-    const populateMakers = ({ data }) => {
+    const populateMakers = (data) => {
 
       return (
         <>
@@ -46,8 +51,13 @@ function Map ({ data }) {
           const coordinates = [(restaurant.longitude), (restaurant.latitude)]
           let marker = new mapboxgl.Marker()
             .setLngLat(coordinates)
-            // .setPopup(new mapboxgl.Popup()
-            //   .setHTML())
+            .setPopup(new mapboxgl.Popup()
+              .trackPointer()
+              .setHTML(`<h4>${restaurant.name}</h4>
+              <p>${restaurant.phone}<br />
+              ${restaurant.street}</p>
+              <img src=${restaurant.photo} maxWidth: "auto"> </img>`)
+              )
             .addTo(map);
           markers.push(marker)
           });
@@ -58,13 +68,8 @@ function Map ({ data }) {
     // Place New Markers for Search Results (needs work)
       <div>
       {
-        function clearMarkers(){
-          markers.forEach((marker) => marker.remove());
-          markers = [];
-        },
-
         function drawMarkers(data) {
-        // clearMarkers();
+        clearMarkers();
         data.map((coordPair) => {
         let marker = new mapboxgl.Marker()
           .setLngLat(coordPair)
@@ -72,6 +77,7 @@ function Map ({ data }) {
           //   .setHTML())
           .addTo(map);
         markers.push(marker)
+        console.log('new markers drawn')
       })}
       }
       </div>
@@ -80,7 +86,8 @@ function Map ({ data }) {
     </>
       )
     }
-    populateMakers( {data} );
+    populateMakers(data);
+    console.log(data)
     
     const directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken,

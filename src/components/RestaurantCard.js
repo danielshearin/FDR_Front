@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Divider, Header } from 'semantic-ui-react';
 
 const RestaurantCard = props => {
-    const {id, name, city, street, zip, phone, longitude, latitude, coordinates } = props
+    const {id, name, city, street, zip, phone, longitude, latitude, coordinates, photo } = props
 
     return (
         <>

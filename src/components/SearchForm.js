@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { Form, Dropdown, Divider, Button, Container } from "semantic-ui-react";
 import _ from 'lodash';
 import axios from "axios";
-import RestResults from "./RestResults";
-import MenuItemResults from "./ItemResults";
+import ItemResults from "./ItemResults";
 import Map from "./Map";
 import RestaurantCard from "./RestaurantCard";
 import ResultBar from "./ResultBar";
-import mapboxgl from 'mapbox-gl';
 import { appendToMemberExpression } from "@babel/types";
 
 
@@ -157,26 +155,28 @@ const SearchForm = () => {
         array.push(coordinates)
       })
       )
-      
+
       setRestCoords(array)
       console.log(restCoords)
-// OLD CODE, potentially useful
+
+      // OLD CODE, potentially useful
       // const restaurants = await axios.post("/api/searchitems", data)
       // .then(response => {
-      //   const restaurants = response.data
-      //     restaurants.map((restaurant) => {
-      //       setRestResult(restaurant.restaurant)
-      //       console.log(restResult)
-      //     })
-      //     })
+        //   const restaurants = response.data
+        //     restaurants.map((restaurant) => {
+          //       setRestResult(restaurant.restaurant)
+          //       console.log(restResult)
+          //     })
+          //     })
+          
+          
+          /*.get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)*/
+          
+        } catch (error) {
+          console.error(error.message)
+        }
+      }
 
-
-        /*.get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)*/
-        
-    } catch (error) {
-      console.error(error.message)
-    }
-  }
 
 
   return (
@@ -247,7 +247,7 @@ const SearchForm = () => {
     </Container>
     <Map data={restCoords} />
     <ResultBar />
-    <MenuItemResults data={itemResult} />
+    <ItemResults data={itemResult} />
     </>
   )
 }

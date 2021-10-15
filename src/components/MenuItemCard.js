@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Container, Header } from "semantic-ui-react";
+import { Segment, Container, Button, Header, Icon } from "semantic-ui-react";
 import RestaurantCard from "./RestaurantCard";
 
 const MenuItemCard = props => {
@@ -9,11 +9,17 @@ const MenuItemCard = props => {
         <>
         <Container>
             <Segment>
-                <h3>{item} ${price}</h3>
+                <h3>{item} ${price}</h3><Button animated='vertical' floated='right'>
+                <Button.Content hidden>Save</Button.Content>
+                <Button.Content visible>
+                    {/* <Icon name='plus' /> */}
+                    <Icon name='shop' />
+                </Button.Content>
+                </Button>
                 <p>{description}</p>
-                <p>{dietary}</p>
+                <p>{dietary}
+                </p>
             </Segment>
-            <RestaurantCard data={restaurant}/>
         </Container>
         </>
     )

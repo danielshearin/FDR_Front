@@ -2,35 +2,83 @@ import React from "react";
 import MenuItemCard from "./MenuItemCard";
 import { Header, Divider, Container } from "semantic-ui-react";
 import RestaurantCard from "./RestaurantCard";
+import axios from "axios";
 
-function MenuItemResults ({ data }) {
+
+
+// let defaultRestaurants
+// const handleSubmit = () => {
+//     // try {
+//         //     e.preventDefault()
+//         const result = axios.get('api/restaurants')
+//         .then(response => {
+//             defaultRestaurants = []
+//             const restDefault = response.data
+//             restDefault.map((restaurant) => {
+//                 defaultRestaurants.push(restaurant.name)
+//             })
+//             // console.log('axios')
+//             // console.log(defaultRestaurants)
+//             return (defaultRestaurants)
+//         })
+//         console.log('after axios')
+//         console.log(defaultRestaurants)
+//         return defaultRestaurants
+//         // } catch (error) {
+//             //     console.error(error.message)
+//             //     }
+// }
+
+function ItemResults ({ data }) {
+
+    let defaultRestaurants
+    const handleSubmit = () => {
+        defaultRestaurants = []
+        axios.get('api/restaurants')
+        .then(response => {
+            const restDefault = response.data
+            restDefault.map((restaurant) => {
+                defaultRestaurants.push(restaurant.name)
+            })
+            // console.log('axios')
+            // console.log(defaultRestaurants)
+
+        })
+        console.log('after axios')
+        console.log(defaultRestaurants)
+        // return defaultRestaurants
+}
+
+
+console.log(defaultRestaurants)
+console.log(data)
+
     return (
         <>
         {!data 
         ? (
-            <p></p>)
+            <p>NO DATA</p>)
         : (
+            handleSubmit(),
+            console.log('data passed in return'),
+            // console.log( {data} ),
             <Container>
-            <br />
-            {data.map((item) => {
+            <br />hi
+            {/* {defaultRestaurants.map((restaurant) => {
+                console.log('yes restaurant')
                 return (
-                    <>
+                    <>                  
                     <RestaurantCard 
-                        name={item.restaurant.name}
+                        name={restaurant}
                         />
-                    <MenuItemCard
-                        item={item.item}
-                        price={item.price}
-                        description={item.description}
-                        dietary={item.dietary}/>
                     </>
                 )
             }            
-            )}
+            )} */}
             </Container>
         )}
         </>
     )
 }
 
-export default MenuItemResults
+export default ItemResults

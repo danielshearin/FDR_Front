@@ -79,6 +79,16 @@ code {
   padding-top: 2rem;
 }
 
+.directions-control {
+  font: 8px/10px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+.directions-control.directions-control-directions {
+  background: rgba(57, 56, 71, 0.747);
+  margin: 7px 0 0;
+  color: #5d75a3;
+}
+
 
 
 .page_header {
@@ -132,6 +142,14 @@ code {
   box-shadow: 0 0 0 0px rgb(0 0 0 / 10%);
 }
 
+
+
+.mapboxgl-ctrl-directions {
+  width: 33.33333%;
+  min-width: 220px;
+  max-width: 250px;
+}
+
 .mapbox-directions-component * {
   box-sizing:border-box;
 }
@@ -153,6 +171,29 @@ code {
   padding-right: 0px;
   padding-bottom: 0px;
   padding-left: 0px;
+}
+
+.mapbox-directions-step {
+  position: relative;
+  color: rgba(255, 255, 255, 0.932);
+  cursor: pointer;
+  padding: 20px 20px 20px 40px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+.mapbox-directions-route-summary {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background-color: #7a7fce;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 15px;
+  line-height: 28px;
+  border-radius: 3px;
 }
 
 .button {
