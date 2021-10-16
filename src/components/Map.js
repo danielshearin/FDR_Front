@@ -53,11 +53,11 @@ function Map ( {data} ) {
     map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
 
-    map.on('move', () => {
-      setLng(map.getCenter().lng.toFixed(4));
-      setLat(map.getCenter().lat.toFixed(4));
-      setZoom(map.getZoom().toFixed(2));
-    });
+    // map.on('move', () => {
+    //   setLng(map.getCenter().lng.toFixed(4));
+    //   setLat(map.getCenter().lat.toFixed(4));
+    //   setZoom(map.getZoom().toFixed(2));
+    // });
 
 
 
