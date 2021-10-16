@@ -43,6 +43,7 @@ function ItemResults ( {data} ) {
             )
             )
             setRestaurants(restNames)
+            // setRestaurants(["Chai Pani", "Buxton Hall"])
         })
     }, [])
     
@@ -53,21 +54,24 @@ function ItemResults ( {data} ) {
             <Container>
             {
                 restaurants.map(restaurant => (
-                    <div>REST {restaurant}</div>
+                    <RestaurantCard name={restaurant} />,
+                    data.map(item => (
+                        <div>
+                        {
+                        item.restaurant.name === restaurant ?
+                        <MenuItemCard
+                            item={item.item}
+                            price={item.price}
+                            description={item.description}
+                            dietary={item.dietary} />
+                        : null}
+                        </div>
+                    ))
                 ))
-                // data.map(item => (
-                //     <div>DATA{item.restaurant.name}</div>
-                // ))
+
             }
         </ Container>
         )}
-            <div>
-            {
-                data.map(item => (
-                <div>DATA{item.restaurant.name}</div>
-                ))
-            }
-            </div>
         </>
     )
 }

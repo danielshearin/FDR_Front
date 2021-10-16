@@ -80,14 +80,14 @@ const SearchForm = () => {
     axios.get("/api/restaurants")
     .then(response => {
       const restaurants = response.data
-      const coordinates = restaurants.map((restaurant) => [(restaurant.longitude), (restaurant.latitude)]
-      )
+      // const coordinates = restaurants.map((restaurant) => [(restaurant.longitude), (restaurant.latitude)]
+      // )
       setRestaurant(restaurants)
     });
 
   }, [])
 
-  const [restResult, setRestResult] = useState()
+  // const [restResult, setRestResult] = useState()
   const [itemResult, setItemResult] = useState()
   const [priceLow, setPriceLow] = useState(1)
   const [priceHigh, setPriceHigh] = useState(49)
