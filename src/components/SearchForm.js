@@ -87,7 +87,7 @@ const SearchForm = () => {
 
   }, [])
 
-  const [restResult, setRestResult] = useState()
+  const [restaurantNames, setRestaurantNames] = useState()
   const [itemResult, setItemResult] = useState()
   const [priceLow, setPriceLow] = useState(1)
   const [priceHigh, setPriceHigh] = useState(49)
@@ -115,19 +115,23 @@ const SearchForm = () => {
 
       
       let array
+      let restArray
       const populateRests = (
         array = [],
+        restArray = [],
         itemResult.map((item) => {
         const coordinates = (item.restaurant)
         array.push(coordinates)
+        const restaurantNames = (item.restaurant.name)
+        restArray.push(restaurantNames)
+
       })
       )
 
-      
       setRestaurant(array)
-      console.log(restaurant)
-      // console.log('restaurant')
-      // console.log(restaurant)
+      const uniqueRestaurants = [...new Set(restArray)];
+      setRestaurantNames(uniqueRestaurants)
+
 
       // OLD CODE, potentially useful
       // const restaurants = await axios.post("/api/searchitems", data)
@@ -217,7 +221,7 @@ const SearchForm = () => {
     </Container>
     {restaurant ? <Map data={restaurant} /> : ''}
     <ResultBar />
-    <ItemResults data={itemResult} restaurants={restaurant} />
+    <ItemResults data={itemResult} restaurants={restaurantNames} />
     </>
   )
 }

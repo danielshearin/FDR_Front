@@ -6,78 +6,43 @@ import axios from "axios";
 
 
 
-// let defaultRestaurants
-// const handleSubmit = () => {
-//     // try {
-//         //     e.preventDefault()
-//         const result = axios.get('api/restaurants')
-//         .then(response => {
-//             defaultRestaurants = []
-//             const restDefault = response.data
-//             restDefault.map((restaurant) => {
-//                 defaultRestaurants.push(restaurant.name)
-//             })
-//             // console.log('axios')
-//             // console.log(defaultRestaurants)
-//             return (defaultRestaurants)
-//         })
-//         console.log('after axios')
-//         console.log(defaultRestaurants)
-//         return defaultRestaurants
-//         // } catch (error) {
-//             //     console.error(error.message)
-//             //     }
-// }
-
-
-function ItemResults ( {data} ) {
-    // console.log(data)
-    const [restaurants, setRestaurants] = useState([])
-
-    useEffect(() => {
-        axios.get('api/restaurants')
-        .then(response => {
-            const restDefault = response.data
-            const restNames = restDefault.map((item) => (
-                item.name
-            )
-            )
-            setRestaurants(restNames)
-            // setRestaurants(["Chai Pani", "Buxton Hall"])
-        })
-    }, [])
-
+function ItemResults ( {data, restaurants} ) {
+    console.log(data)
+    console.log(restaurants)
     
-    const listRestaurants = ( restaurants, data ) => {
-        // console.log(data);
-        restaurants.map((restaurantName) => (
-            // console.log(restaurantName),
-            <div>{restaurantName}</div>
-            // <RestaurantCard name={restaurant} />,
-            // data.map(item => (
-            //     <div>
-            //     {
-            //     item.restaurant.name === restaurant ?
-            //     <MenuItemCard
-            //         item={item.item}
-            //         price={item.price}
-            //         description={item.description}
-            //         dietary={item.dietary} />
-            //     : null}
-            //     </div>
-            // ))
-            )
-            )
-    }
-
     return (
         <>
-        {!!data && ( 
+        {!!restaurants && (
+            
             <Container>
-            {
-            listRestaurants( restaurants, data)
-            }
-        </ Container>
+            <br />
+            {restaurants.map((restName) => {
+                return (
+                    <>                 
+                    <RestaurantCard 
+                        name={restName}
+                        />
+                    {data.map((item) => {
+                        return (
+                            <>
+                            {
+                            item.restaurant.name === restName ?
+                            <MenuItemCard
+                                item={item.item}
+                                price={item.price}
+                                description={item.description}
+                                dietary={item.dietary} />
+                            : null}
+                            </>
+                        )
+                    })
+                    
+                    }
+                    </>
+                )
+            }            
+            )}
+            </Container>
         )}
         </>
     )

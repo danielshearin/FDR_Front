@@ -8,7 +8,7 @@ const RestaurantCard = props => {
         <>
             <Container>
             <Header size='large'>
-            <div class='restaurant_name'>Hi {name}</div></Header>
+            <div class='restaurant_name'>{name}</div></Header>
             </Container>
         </>
     )
