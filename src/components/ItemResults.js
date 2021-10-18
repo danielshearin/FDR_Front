@@ -31,7 +31,7 @@ import axios from "axios";
 
 
 function ItemResults ( {data} ) {
-    console.log(data)
+    // console.log(data)
     const [restaurants, setRestaurants] = useState([])
 
     useEffect(() => {
@@ -46,29 +46,36 @@ function ItemResults ( {data} ) {
             // setRestaurants(["Chai Pani", "Buxton Hall"])
         })
     }, [])
+
     
+    const listRestaurants = ( restaurants, data ) => {
+        // console.log(data);
+        restaurants.map((restaurantName) => (
+            // console.log(restaurantName),
+            <div>{restaurantName}</div>
+            // <RestaurantCard name={restaurant} />,
+            // data.map(item => (
+            //     <div>
+            //     {
+            //     item.restaurant.name === restaurant ?
+            //     <MenuItemCard
+            //         item={item.item}
+            //         price={item.price}
+            //         description={item.description}
+            //         dietary={item.dietary} />
+            //     : null}
+            //     </div>
+            // ))
+            )
+            )
+    }
 
     return (
         <>
         {!!data && ( 
             <Container>
             {
-                restaurants.map(restaurant => (
-                    <RestaurantCard name={restaurant} />,
-                    data.map(item => (
-                        <div>
-                        {
-                        item.restaurant.name === restaurant ?
-                        <MenuItemCard
-                            item={item.item}
-                            price={item.price}
-                            description={item.description}
-                            dietary={item.dietary} />
-                        : null}
-                        </div>
-                    ))
-                ))
-
+            listRestaurants( restaurants, data)
             }
         </ Container>
         )}
