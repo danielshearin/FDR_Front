@@ -221,3 +221,7 @@ code {
   border-radius: 50%;
   cursor: pointer;
 }
+
+.rest_item_result {
+  padding-bottom: 30px;
+}

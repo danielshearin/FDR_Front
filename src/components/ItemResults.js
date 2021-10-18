@@ -25,8 +25,7 @@ function ItemResults ( {data, restaurants} ) {
                     {data.map((item) => {
                         return (
                             <>
-                            {
-                            item.restaurant.name === restName ?
+                            {item.restaurant.name === restName ?
                             <MenuItemCard
                                 item={item.item}
                                 price={item.price}
