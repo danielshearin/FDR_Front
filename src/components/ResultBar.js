@@ -8,8 +8,8 @@ const ResultBar = () => (
     <Header as="h1">
         Results
     </Header>
-
     </div>
+    <Divider hidden />
     </Container>
 );
 

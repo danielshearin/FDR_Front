@@ -5,7 +5,6 @@ import RestaurantCard from "./RestaurantCard";
 import axios from "axios";
 
 
-
 function ItemResults ( {data, restaurants} ) {
     console.log(data)
     console.log(restaurants)
@@ -13,11 +12,10 @@ function ItemResults ( {data, restaurants} ) {
     return (
         <>
         {!!restaurants && (
-            
-            <Container>
-            <br />
+            <div>
             {restaurants.map((restName) => {
                 return (
+                    <div class='rest_item_result'>
                     <>                 
                     <RestaurantCard 
                         name={restName}
@@ -25,6 +23,8 @@ function ItemResults ( {data, restaurants} ) {
                     {data.map((item) => {
                         return (
                             <>
+                            <Container>
+                            <div class="item_result_group">
                             {item.restaurant.name === restName ?
                             <MenuItemCard
                                 item={item.item}
@@ -32,16 +32,17 @@ function ItemResults ( {data, restaurants} ) {
                                 description={item.description}
                                 dietary={item.dietary} />
                             : null}
+                            </div>
+                            </Container>
                             </>
                         )
-                    })
-                    
-                    }
+                    })}
                     </>
+                    {/* <Divider hidden /> */}
+                    </div>
                 )
-            }            
-            )}
-            </Container>
+            })}
+            </div>
         )}
         </>
     )

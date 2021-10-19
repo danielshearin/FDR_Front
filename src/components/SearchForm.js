@@ -18,26 +18,27 @@ const getOptions = (number, prefix = 'Choice ') =>
 
 
 const dayOptions=[
-    { key: 'a', text: 'All Days', value: 'allDays' },
+    // { key: 'd', text: 'No Day Selected', value: ('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'weekends')},
+    { key: 'a', text: 'Available Everyday', value: 'all_days' },
     { key: 'weekends', text: 'Weekends', value: 'weekends' },
-    { key: 'weekdays', text: 'Weekdays', value: 'weekdays' },
+    // { key: 'weekdays', text: 'Weekdays', value: ('weekdays', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday')},
     { key: 'm', text: 'Monday', value: 'monday' },
     { key: 'tu', text: 'Tuesday', value: 'tuesday' },
     { key: 'w', text: 'Wednesday', value: 'wednesday' },
     { key: 'th', text: 'Thursday', value: 'thursday' },
     { key: 'f', text: 'Friday', value: 'friday' },
     { key: 'sa', text: 'Saturday', value: 'saturday' },
-    { key: 'su', text: 'Sunday', value: 'sunday' }
+    { key: 'su', text: 'Sunday', value: 'sunday' },
 ]
 
 
 const dietaryOptions=[
-    { key: 'all', text: 'No Restrictions', value: 'all' },
-    { key: 'vegetarian', text: 'vegetarian', value: 'vegetarian' },
-    { key: 'vegan', text: 'vegan', value: 'vegan' },
-    { key: 'glueten-free', text: 'gluten-free', value: 'glueten-free' },
-    // { key: 'vegetarian_and_gluten-free', text: 'vegetarian and gluten-free', value: 'vegetarian_and_luten-free' },
-    // { key: 'vegan_and_gluten-free', text: 'vegan and gluten-free', value: 'vegan_and_gluten-free' }
+    { key: 'all', text: 'No Restrictions', value: 'none' },
+    { key: 'veggie', text: 'Vegetarian', value: 'vegetarian'},
+    { key: 'vega', text: 'Vegan', value: 'vegan'},
+    { key: 'gluten_free', text: 'Gluten-free', value: 'gluten_free'},
+    { key: 'vegetarian_and_gf', text: 'Vegetarian and Gluten-free', value: 'vegetarian_and_gf'},
+    { key: 'vegan_and_gf', text: 'Vegan and Gluten-free', value: 'vegan_and_gf' }
 ]
 
 
@@ -80,8 +81,6 @@ const SearchForm = () => {
     axios.get("/api/restaurants")
     .then(response => {
       const restaurants = response.data
-      // const coordinates = restaurants.map((restaurant) => [(restaurant.longitude), (restaurant.latitude)]
-      // )
       setRestaurant(restaurants)
     });
 
@@ -91,9 +90,9 @@ const SearchForm = () => {
   const [itemResult, setItemResult] = useState()
   const [priceLow, setPriceLow] = useState(1)
   const [priceHigh, setPriceHigh] = useState(49)
-  const [time, setTime] = useState(null)
-  const [day, setDay] = useState('allDays')
-  const [dietary, setDietary] = useState('all')
+  const [time, setTime] = useState('12')
+  const [day, setDay] = useState(['all_days'])
+  const [dietary, setDietary] = useState(['none'])
   
 
   const handleSubmit = async (e) => {
@@ -111,6 +110,7 @@ const SearchForm = () => {
 
       
       const searchResult = await axios.post("/api/searchitems", data)
+        console.log(data)
         setItemResult(searchResult.data)
 
       
@@ -133,17 +133,7 @@ const SearchForm = () => {
       setRestaurantNames(uniqueRestaurants)
 
 
-      // OLD CODE, potentially useful
-      // const restaurants = await axios.post("/api/searchitems", data)
-      // .then(response => {
-        //   const restaurants = response.data
-        //     restaurants.map((restaurant) => {
-          //       setRestResult(restaurant.restaurant)
-          //       console.log(restResult)
-          //     })
-          //     })
-          
-          
+      // OLD CODE for reference
           /*.get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)*/
           
         } catch (error) {
@@ -181,7 +171,7 @@ const SearchForm = () => {
           <Dropdown
             fluid search selection
             options={timeOptions}
-            placeholder="Time"
+            placeholder="Noon"
             onChange={(e, {value}) => {setTime(value)}}
           />
         <br />
@@ -191,7 +181,7 @@ const SearchForm = () => {
             fluid search selection
             fluid multiple selection
             options={dayOptions}
-            placeholder="All Days"
+            placeholder="No Day Selected"
             onChange={(e, {value}) => {setDay(value)}}
           />
         <br />
@@ -221,6 +211,7 @@ const SearchForm = () => {
     </Container>
     {restaurant ? <Map data={restaurant} /> : ''}
     <ResultBar />
+    <Divider hidden />
     <ItemResults data={itemResult} restaurants={restaurantNames} />
     </>
   )

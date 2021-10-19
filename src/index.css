@@ -103,15 +103,42 @@ code {
   border-radius: 12px;
 }
 
+.rest_item_result {
+  padding-bottom: 30px;
+}
+
 .restaurant_name {
+  /* color: white; */
+  /* font-size: larger; */
   color: #6b85b4f1;
   width: 10em;
   height: auto;
   border-radius: 12px;
-  padding-left: 0px;
-  padding-top: 7px;
+  padding-left: 18px;
+  padding-bottom: 14px;
+  /* padding-top: 7px; */
   margin: 5px 0;
 }
+
+.price {
+  float: right;
+  color: #6b85b4f1;
+  margin-right: 7px;
+  font-size: smaller;
+}
+
+.description {
+  padding-right: 100px;
+}
+
+.dietary {
+  color: #6b85b4f1;
+}
+
+.cart_button {
+  padding-bottom: 8px;
+}
+
 .results {
   color: #21232c;
   background-color: #ecaf3c;
@@ -119,6 +146,11 @@ code {
   margin: 8px 0;
   border-radius: 12px;
 }
+
+.item_result_group {
+  margin-left: 0px;
+}
+
 .form {
   color: #ffffff;
   width: 100%;
@@ -222,6 +254,3 @@ code {
   cursor: pointer;
 }
 
-.rest_item_result {
-  padding-bottom: 30px;
-}
