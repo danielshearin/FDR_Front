@@ -35,7 +35,7 @@ function Map ( {data} ) {
           .setHTML(`<h4>${restaurant.name}</h4>
           <p>${restaurant.phone}<br />
           ${restaurant.street}</p>
-          <img src=${restaurant.photo} maxWidth: "auto"> </img>`)
+          <img src=${restaurant.photo} width="150" height="100"> </img>`)
           )
         .addTo(map);
       });

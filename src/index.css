@@ -4,7 +4,7 @@ body {
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* background-color: #F3F3E7; */
@@ -13,52 +13,51 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 .ui.header {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color:rgb(255, 255, 255);  
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(255, 255, 255);
 }
 
-.ui.search.dropdown>.text {
+.ui.search.dropdown > .text {
   font-weight: bold;
   /* color:#4d8a8a; */
-  color:#6b85b4;
+  color: #6b85b4;
 }
 
-.ui.dropdown:not(.button)>.default.text {
+.ui.dropdown:not(.button) > .default.text {
   font-weight: normal;
   color: rgba(165, 165, 165, 0.87);
-  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 .label {
   font-size: 11pt;
   padding-bottom: 5px;
-  
 }
 
 .ui.label {
   /* color:#4d8a8a; */
-  color:#5d75a3;
+  color: #5d75a3;
   background-color: #ffffff;
-  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
-.ui.multiple.dropdown>.label {
+.ui.multiple.dropdown > .label {
   box-shadow: 0 0 0 1px rgb(34 36 38 / 15%) inset;
-  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: bolder;
-  padding: .48em;
+  padding: 0.48em;
 }
 
-.ui.dropdown .menu>.item,
+.ui.dropdown .menu > .item,
 .ui.dropdown.selected,
 .ui.dropdown .menu .selected.item {
   color: rgba(165, 165, 165, 0.87);
-  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 .ui.selection.dropdown {
@@ -66,8 +65,8 @@ code {
 }
 
 .ui.button {
-  background:#7bdada;
-  color:#fdfdfd;
+  background: #7bdada;
+  color: #fdfdfd;
   font-weight: 2000px;
   border-color: #ffffff;
   border-style: solid;
@@ -80,7 +79,7 @@ code {
 }
 
 .directions-control {
-  font: 8px/10px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font: 8px/10px "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 .directions-control.directions-control-directions {
@@ -88,8 +87,6 @@ code {
   margin: 7px 0 0;
   color: #5d75a3;
 }
-
-
 
 .page_header {
   color: #21232c;
@@ -111,7 +108,7 @@ code {
   /* color: white; */
   /* font-size: larger; */
   color: #6b85b4f1;
-  width: 10em;
+  width: auto;
   height: auto;
   border-radius: 12px;
   padding-left: 18px;
@@ -174,8 +171,6 @@ code {
   box-shadow: 0 0 0 0px rgb(0 0 0 / 10%);
 }
 
-
-
 .mapboxgl-ctrl-directions {
   width: 33.33333%;
   min-width: 220px;
@@ -183,10 +178,10 @@ code {
 }
 
 .mapbox-directions-component * {
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
-.mapboxgl-ctrl-geocoder input[type='text'] {
+.mapboxgl-ctrl-geocoder input[type="text"] {
   font-size: 10px;
   width: 100%;
   border: 0;
@@ -243,14 +238,13 @@ code {
   left: 0;
   margin: 12px;
   border-radius: 4px;
-  }
+}
 
 .marker {
-  background-image: url('mapbox-icon.png');
+  background-image: url("mapbox-icon.png");
   background-size: cover;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
 }
-

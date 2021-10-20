@@ -19,6 +19,7 @@ const getOptions = (number, prefix = 'Choice ') =>
 
 const dayOptions=[
     // { key: 'd', text: 'No Day Selected', value: ('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'weekends')},
+    { key: 'd', text: "No Day Selected", value: 'none'},
     { key: 'a', text: 'Available Everyday', value: 'all_days' },
     { key: 'weekends', text: 'Weekends', value: 'weekends' },
     // { key: 'weekdays', text: 'Weekdays', value: ('weekdays', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday')},
@@ -91,7 +92,7 @@ const SearchForm = () => {
   const [priceLow, setPriceLow] = useState(1)
   const [priceHigh, setPriceHigh] = useState(49)
   const [time, setTime] = useState('12')
-  const [day, setDay] = useState(['all_days'])
+  const [day, setDay] = useState(['none'])
   const [dietary, setDietary] = useState(['none'])
   
 
