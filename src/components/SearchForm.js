@@ -18,11 +18,10 @@ const getOptions = (number, prefix = 'Choice ') =>
 
 
 const dayOptions=[
-    // { key: 'd', text: 'No Day Selected', value: ('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'weekends')},
     { key: 'd', text: "No Day Selected", value: 'none'},
-    { key: 'a', text: 'Available Everyday', value: 'all_days' },
-    { key: 'weekends', text: 'Weekends', value: 'weekends' },
-    // { key: 'weekdays', text: 'Weekdays', value: ('weekdays', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday')},
+    // { key: 'a', text: 'Available Everyday', value: 'all_days' },
+    { key: 'weekends', text: 'Weekends', value: "weekends"},
+    { key: 'weekdays', text: 'Weekdays', value: "weekdays"},
     { key: 'm', text: 'Monday', value: 'monday' },
     { key: 'tu', text: 'Tuesday', value: 'tuesday' },
     { key: 'w', text: 'Wednesday', value: 'wednesday' },
