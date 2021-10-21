@@ -1,6 +1,6 @@
 import React from 'react'
 // import { connect } from "react-redux";
-import { Container, Divider, Header, Message } from "semantic-ui-react";
+import { Container, Divider, Header } from "semantic-ui-react";
 // import SearchForm from './SearchForm.js';
 
 const NavBar = props => (

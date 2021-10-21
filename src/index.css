@@ -4,7 +4,7 @@ body {
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* background-color: #F3F3E7; */
@@ -13,50 +13,51 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 .ui.header {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color:rgb(255, 255, 255);  
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(255, 255, 255);
 }
 
-.ui.search.dropdown>.text {
+.ui.search.dropdown > .text {
   font-weight: bold;
-  color:#4d8a8a;
+  /* color:#4d8a8a; */
+  color: #6b85b4;
 }
 
-.ui.dropdown:not(.button)>.default.text {
+.ui.dropdown:not(.button) > .default.text {
   font-weight: normal;
   color: rgba(165, 165, 165, 0.87);
-  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 .label {
   font-size: 11pt;
   padding-bottom: 5px;
-  
 }
 
 .ui.label {
-  color:#4d8a8a;
+  /* color:#4d8a8a; */
+  color: #5d75a3;
   background-color: #ffffff;
-  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
-.ui.multiple.dropdown>.label {
+.ui.multiple.dropdown > .label {
   box-shadow: 0 0 0 1px rgb(34 36 38 / 15%) inset;
-  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: bolder;
-  padding: .48em;
+  padding: 0.48em;
 }
 
-.ui.dropdown .menu>.item,
+.ui.dropdown .menu > .item,
 .ui.dropdown.selected,
 .ui.dropdown .menu .selected.item {
   color: rgba(165, 165, 165, 0.87);
-  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 .ui.selection.dropdown {
@@ -64,8 +65,8 @@ code {
 }
 
 .ui.button {
-  background:#7bdada;
-  color:#fdfdfd;
+  background: #7bdada;
+  color: #fdfdfd;
   font-weight: 2000px;
   border-color: #ffffff;
   border-style: solid;
@@ -77,7 +78,15 @@ code {
   padding-top: 2rem;
 }
 
+.directions-control {
+  font: 8px/10px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
 
+.directions-control.directions-control-directions {
+  background: rgba(57, 56, 71, 0.747);
+  margin: 7px 0 0;
+  color: #5d75a3;
+}
 
 .page_header {
   color: #21232c;
@@ -91,6 +100,42 @@ code {
   border-radius: 12px;
 }
 
+.rest_item_result {
+  padding-bottom: 30px;
+}
+
+.restaurant_name {
+  /* color: white; */
+  /* font-size: larger; */
+  color: #6b85b4f1;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  padding-left: 18px;
+  padding-bottom: 14px;
+  /* padding-top: 7px; */
+  margin: 5px 0;
+}
+
+.price {
+  float: right;
+  color: #6b85b4f1;
+  margin-right: 7px;
+  font-size: smaller;
+}
+
+.description {
+  padding-right: 100px;
+}
+
+.dietary {
+  color: #6b85b4f1;
+}
+
+.cart_button {
+  padding-bottom: 8px;
+}
+
 .results {
   color: #21232c;
   background-color: #ecaf3c;
@@ -98,6 +143,11 @@ code {
   margin: 8px 0;
   border-radius: 12px;
 }
+
+.item_result_group {
+  margin-left: 0px;
+}
+
 .form {
   color: #ffffff;
   width: 100%;
@@ -121,11 +171,17 @@ code {
   box-shadow: 0 0 0 0px rgb(0 0 0 / 10%);
 }
 
-.mapbox-directions-component * {
-  box-sizing:border-box;
+.mapboxgl-ctrl-directions {
+  width: 33.33333%;
+  min-width: 220px;
+  max-width: 250px;
 }
 
-.mapboxgl-ctrl-geocoder input[type='text'] {
+.mapbox-directions-component * {
+  box-sizing: border-box;
+}
+
+.mapboxgl-ctrl-geocoder input[type="text"] {
   font-size: 10px;
   width: 100%;
   border: 0;
@@ -144,6 +200,29 @@ code {
   padding-left: 0px;
 }
 
+.mapbox-directions-step {
+  position: relative;
+  color: rgba(255, 255, 255, 0.932);
+  cursor: pointer;
+  padding: 20px 20px 20px 40px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+.mapbox-directions-route-summary {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background-color: #7a7fce;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 15px;
+  line-height: 28px;
+  border-radius: 3px;
+}
+
 .button {
   color: rgb(70, 180, 207);
 }
@@ -159,10 +238,10 @@ code {
   left: 0;
   margin: 12px;
   border-radius: 4px;
-  }
+}
 
 .marker {
-  background-image: url('mapbox-icon.png');
+  background-image: url("mapbox-icon.png");
   background-size: cover;
   width: 50px;
   height: 50px;
