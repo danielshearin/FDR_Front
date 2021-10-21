@@ -93,7 +93,7 @@ const SearchForm = () => {
   const [time, setTime] = useState('12')
   const [day, setDay] = useState(['none'])
   const [dietary, setDietary] = useState(['none'])
-  
+
 
   const handleSubmit = async (e) => {
     try {

@@ -23,8 +23,8 @@ const SaveButton = props => {
             <Button animated='vertical' floated='right' onClick={handleAdd}>
             <Button.Content hidden>Save</Button.Content>
             <Button.Content visible>
-                {/* <Icon name='plus' /> */}
-                <Icon name='shop' />
+                <Icon name='plus' />
+                {/* <Icon name='shop' /> */}
             </Button.Content>
             </Button></div>
         </>
