@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MenuItemCard from "./MenuItemCard";
 import { Header, Divider, Container } from "semantic-ui-react";
 import RestaurantCard from "./RestaurantCard";
-import axios from "axios";
+
 
 
 function ItemResults ( {data, restaurants} ) {
@@ -30,7 +30,9 @@ function ItemResults ( {data, restaurants} ) {
                                 item={item.item}
                                 price={item.price}
                                 description={item.description}
-                                dietary={item.dietary} />
+                                dietary={item.dietary}
+                                restaurant={item.restaurant}
+                                id={item.id} />
                             : null}
                             </div>
                             </Container>
