@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MenuItemCard from "./MenuItemCard";
 import { Header, Divider, Container } from "semantic-ui-react";
 import RestaurantCard from "./RestaurantCard";
@@ -8,6 +8,7 @@ import RestaurantCard from "./RestaurantCard";
 function ItemResults ( {data, restaurants} ) {
     console.log(data)
     console.log(restaurants)
+    const [uniqueItemList, setUniqueItemList] = useState([])
     
     return (
         <>
