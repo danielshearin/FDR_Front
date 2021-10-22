@@ -106,30 +106,23 @@ const SearchForm = () => {
         "day":day,
         "dietary":dietary 
       }
-
-
+      
       
       const searchResult = await axios.post("/api/searchitems", data)
-        console.log(data)
-        setItemResult(searchResult.data)
-
+      console.log(data)
       
-      let array
-      let restArray
-      const populateRests = (
-        array = [],
-        restArray = [],
-        itemResult.map((item) => {
-          const restaurantObject = (item.restaurant)
-          array.push(restaurantObject)
-          const restaurantNames = (item.restaurant.name)
-          restArray.push(restaurantNames)
-
+      
+      const array = []
+      const restArray = []
+      searchResult.data.map((item) => {
+        const restaurantObject = (item.restaurant)
+        array.push(restaurantObject)
+        const restaurantNames = (item.restaurant.name)
+        restArray.push(restaurantNames)
       })
-      )
-
       setRestaurant(array)
       const uniqueRestaurants = [...new Set(restArray)];
+      setItemResult(searchResult.data)
       setRestaurantNames(uniqueRestaurants)
 
 
