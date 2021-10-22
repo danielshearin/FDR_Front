@@ -37,8 +37,8 @@ const dietaryOptions=[
     { key: 'veggie', text: 'Vegetarian', value: 'vegetarian'},
     { key: 'vega', text: 'Vegan', value: 'vegan'},
     { key: 'gluten_free', text: 'Gluten-free', value: 'gluten_free'},
-    { key: 'vegetarian_and_gf', text: 'Vegetarian and Gluten-free', value: 'vegetarian_and_gf'},
-    { key: 'vegan_and_gf', text: 'Vegan and Gluten-free', value: 'vegan_and_gf' }
+    // { key: 'vegetarian_and_gf', text: 'Vegetarian and Gluten-free', value: 'vegetarian_and_gf'},
+    // { key: 'vegan_and_gf', text: 'Vegan and Gluten-free', value: 'vegan_and_gf' }
 ]
 
 
@@ -120,10 +120,10 @@ const SearchForm = () => {
         array = [],
         restArray = [],
         itemResult.map((item) => {
-        const coordinates = (item.restaurant)
-        array.push(coordinates)
-        const restaurantNames = (item.restaurant.name)
-        restArray.push(restaurantNames)
+          const restaurantObject = (item.restaurant)
+          array.push(restaurantObject)
+          const restaurantNames = (item.restaurant.name)
+          restArray.push(restaurantNames)
 
       })
       )

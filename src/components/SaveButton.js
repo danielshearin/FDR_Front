@@ -14,7 +14,7 @@ const SaveButton = props => {
         setSavedItems(savedItemArray)
     }
     
-    console.log(savedItems)
+    // console.log(savedItems)
     // <SavedList keptItems={savedItems} />
     
     return (

@@ -8,11 +8,11 @@ import RestaurantCard from "./RestaurantCard";
 function ItemResults ( {data, restaurants} ) {
     console.log(data)
     console.log(restaurants)
-    const [uniqueItemList, setUniqueItemList] = useState([])
+    // const [uniqueItemList, setUniqueItemList] = useState([])
     
     return (
         <>
-        {!!restaurants && (
+        {restaurants && (
             <div>
             {restaurants.map((restName) => {
                 return (
@@ -41,7 +41,6 @@ function ItemResults ( {data, restaurants} ) {
                         )
                     })}
                     </>
-                    {/* <Divider hidden /> */}
                     </div>
                 )
             })}
