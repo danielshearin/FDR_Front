@@ -64,7 +64,18 @@ code {
   border: 0px solid rgba(29, 30, 32, 0.15);
 }
 
-.ui.button {
+.ui.segment {
+  position: relative;
+    background: #fff;
+    box-shadow: 0 1px 1px 0 #5d76a33f;
+    margin: 1rem 0;
+    padding: 1em 1em;
+    border-radius: .28571429rem;
+    border: 1px solid #2f3b5234;
+}
+
+.ui.button,
+.not_fav {
   background: #7bdada;
   color: #fdfdfd;
   font-weight: 2000px;
@@ -117,6 +128,10 @@ code {
   margin: 5px 0;
 }
 
+.item {
+  color: rgb(68, 68, 68);
+}
+
 .price {
   float: right;
   color: #6b85b4f1;
@@ -126,10 +141,40 @@ code {
 
 .description {
   padding-right: 100px;
+  font-style: italic;
+  color:rgb(43, 43, 43);
+
 }
 
 .dietary {
   color: #6b85b4f1;
+  font-style: bold;
+  font-style: italic;
+  padding-top: 5px;
+}
+
+.ui.button.toggle {
+  border-radius: 12px;
+}
+
+.ui.button.toggle.active {
+  background-color: #7bdada!important;
+  box-shadow: none!important;
+  text-shadow: none;
+  color: #6b85b4f1!important;
+}
+
+.ui.button.toggle.active:hover {
+  background-color: #7bdada!important;
+  box-shadow: none!important;
+  text-shadow: none;
+  color: #6b85b4f1!important;
+  
+}
+
+.ui.button:hover {
+  color: #6b85b4f1;
+  background-color: white;
 }
 
 .cart_button {
@@ -248,3 +293,5 @@ code {
   border-radius: 50%;
   cursor: pointer;
 }
+
+
