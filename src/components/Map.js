@@ -40,14 +40,14 @@ function Map ( {data} ) {
         .addTo(map);
       });
 
-    
+
     const directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
       unit: 'imperial',
       profile: 'mapbox/driving'
     });
+  
     map.addControl(directions, 'top-left');
-    
 
     // Add navigation control (the +/- zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), 'top-right');
