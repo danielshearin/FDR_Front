@@ -108,7 +108,7 @@ const SearchForm = () => {
       }
       
       
-      const searchResult = await axios.post("https://five-dollar-lunch.herokuapp.com//api/searchitems", data)
+      const searchResult = await axios.post("https://five-dollar-lunch.herokuapp.com/api/searchitems", data)
       console.log(data)
       
       
