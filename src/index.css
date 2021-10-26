@@ -128,8 +128,16 @@ code {
   margin: 5px 0;
 }
 
+.restaurant_name:hover {
+  color: #a5b7d8f1;
+}
+
 .item {
   color: rgb(68, 68, 68);
+}
+
+.item:hover {
+  color: #bcc7dbf1;
 }
 
 .price {
@@ -139,6 +147,9 @@ code {
   font-size: smaller;
 }
 
+.price:hover {
+  color: #bcc7dbf1;
+}
 .description {
   padding-right: 100px;
   /* font-style: italic; */

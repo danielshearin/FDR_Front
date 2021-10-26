@@ -68,8 +68,7 @@ const timeOptions=[
 
 const SearchForm = () => {
 
-  // const [restaurant, setRestaurant] = useState(null)
-  const [restaurantNames, setRestaurantNames] = useState(null)
+  const [restaurantObjects, setRestaurantObjects] = useState(null)
   const [itemResult, setItemResult] = useState()
   const [priceLow, setPriceLow] = useState(1)
   const [priceHigh, setPriceHigh] = useState(49)
@@ -81,7 +80,7 @@ const SearchForm = () => {
     axios.get("https://five-dollar-lunch.herokuapp.com/api/restaurants")
     .then(response => {
       const restaurants = response.data
-      setRestaurantNames(restaurants)
+      setRestaurantObjects(restaurants)
     });
   }, [])
 
@@ -111,7 +110,7 @@ const SearchForm = () => {
 
       const uniqRestObjects = new Set(arrayRestObj.map(e => JSON.stringify(e)));
       const uniqRestObjArray = Array.from(uniqRestObjects).map(e => JSON.parse(e));
-      setRestaurantNames(uniqRestObjArray)
+      setRestaurantObjects(uniqRestObjArray)
           
     } catch (error) {
       console.error(error.message)
@@ -125,7 +124,7 @@ const SearchForm = () => {
     <Container>
       <Form class="form" onSubmit={handleSubmit}>
 
-        <div class='label'><strong>Price High</strong></div>
+        <div class='label'><strong>Highest Price</strong></div>
           <Dropdown
             label='Price High'
             placeholder='$ 49'
@@ -135,7 +134,7 @@ const SearchForm = () => {
           />
         <br />
 
-        <div class='label'><strong>Price Low</strong></div>
+        <div class='label'><strong>Lowest Price</strong></div>
           <Dropdown
             placeholder='$ 1'
             fluid search selection
@@ -153,7 +152,7 @@ const SearchForm = () => {
           />
         <br />
 
-        <div class='label'><strong>Day</strong></div>
+        <div class='label'><strong>Day of Week</strong></div>
           <Dropdown
             fluid search selection
             fluid multiple selection
@@ -163,7 +162,7 @@ const SearchForm = () => {
           />
         <br />
 
-        <div class='label'><strong>Dietary Needs</strong></div>
+        <div class='label'><strong>Dietary Restrictions</strong></div>
           <Dropdown
             label='Dietary Restrictions'
             placeholder='No Restrictions'
@@ -186,10 +185,10 @@ const SearchForm = () => {
       <pre>{JSON.stringify({ priceLow, priceHigh, time, day, dietary }, null, 2)}</pre> */}
 
     </Container>
-    {restaurantNames ? <Map data={restaurantNames} /> : ''}
+    {restaurantObjects ? <Map data={restaurantObjects} /> : ''}
     <ResultBar />
     <Divider hidden />
-    <ItemResults data={itemResult} restaurants={restaurantNames} />
+    <ItemResults data={itemResult} restaurants={restaurantObjects} />
     </>
   )
 }

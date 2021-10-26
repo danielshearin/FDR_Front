@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import MenuItemCard from "./MenuItemCard";
-import { Header, Divider, Container } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import RestaurantCard from "./RestaurantCard";
 
 

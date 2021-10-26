@@ -1,5 +1,5 @@
-import React, { useState, Component } from "react";
-import { Segment, Container, Button, Header, Icon, Divider } from "semantic-ui-react";
+import React, { Component } from "react";
+import { Button, Icon} from "semantic-ui-react";
 
 
 
