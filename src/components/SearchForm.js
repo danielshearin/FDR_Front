@@ -74,25 +74,22 @@ const timeOptions=[
 
 const SearchForm = () => {
 
-  //TRY 1
-  const [restaurant, setRestaurant] = useState(null)
-
-  useEffect(() => {
-    axios.get("https://five-dollar-lunch.herokuapp.com/api/restaurants")
-    .then(response => {
-      const restaurants = response.data
-      setRestaurant(restaurants)
-    });
-
-  }, [])
-
-  const [restaurantNames, setRestaurantNames] = useState()
+  // const [restaurant, setRestaurant] = useState(null)
+  const [restaurantNames, setRestaurantNames] = useState(null)
   const [itemResult, setItemResult] = useState()
   const [priceLow, setPriceLow] = useState(1)
   const [priceHigh, setPriceHigh] = useState(49)
   const [time, setTime] = useState('12')
   const [day, setDay] = useState(['none'])
   const [dietary, setDietary] = useState(['none'])
+
+  useEffect(() => {
+    axios.get("https://five-dollar-lunch.herokuapp.com/api/restaurants")
+    .then(response => {
+      const restaurants = response.data
+      setRestaurantNames(restaurants)
+    });
+  }, [])
 
 
   const handleSubmit = async (e) => {
@@ -113,21 +110,20 @@ const SearchForm = () => {
       
       
       const array = []
-      const restArray = []
+      // const restArray = []
       searchResult.data.map((item) => {
         const restaurantObject = (item.restaurant)
         array.push(restaurantObject)
-        const restaurantNames = (item.restaurant.name)
-        restArray.push(restaurantNames)
+        // const restaurantNames = (item.restaurant.name)
+        // restArray.push(restaurantNames)
       })
-      setRestaurant(array)
-      console.log(array)
-      const uniqueRestaurants = [...new Set(restArray)];
+      // setRestaurant(array)
+
+      // const uniqueRestaurants = [...new Set(restArray)];
       setItemResult(searchResult.data)
 
       const uniqRestObjects = new Set(array.map(e => JSON.stringify(e)));
       const uniqRestObjArray = Array.from(uniqRestObjects).map(e => JSON.parse(e));
-      console.log(uniqRestObjArray)
       setRestaurantNames(uniqRestObjArray)
 
 
@@ -208,7 +204,7 @@ const SearchForm = () => {
       <pre>{JSON.stringify({ priceLow, priceHigh, time, day, dietary }, null, 2)}</pre> */}
 
     </Container>
-    {restaurant ? <Map data={restaurant} /> : ''}
+    {restaurantNames ? <Map data={restaurantNames} /> : ''}
     <ResultBar />
     <Divider hidden />
     <ItemResults data={itemResult} restaurants={restaurantNames} />
