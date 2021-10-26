@@ -8,7 +8,6 @@ import RestaurantCard from "./RestaurantCard";
 function ItemResults ( {data, restaurants} ) {
     console.log(data)
     console.log(restaurants)
-    // const [uniqueItemList, setUniqueItemList] = useState([])
     
     return (
         <>
@@ -18,30 +17,30 @@ function ItemResults ( {data, restaurants} ) {
                 return (
                     <div class='rest_item_result'>
                     <>                 
-                    <RestaurantCard 
-                        name={restName.name}
-                        website={restName.website}
-                        />
-                    {data.map((item) => {
-                        return (
-                            <>
-                            <Container>
-                            <div class="item_result_group">
-                            {item.restaurant.name === restName.name ?
-                            <MenuItemCard
-                                item={item.item}
-                                price={item.price}
-                                description={item.description}
-                                dietary={item.dietary}
-                                restaurant={item.restaurant}
-                                website={item.restaurant.website}
-                                id={item.id} />
-                            : null}
-                            </div>
-                            </Container>
-                            </>
-                        )
-                    })}
+                        <RestaurantCard 
+                            name={restName.name}
+                            website={restName.website}
+                            />
+                        {data.map((item) => {
+                            return (
+                                <>
+                                <Container>
+                                <div class="item_result_group">
+                                {item.restaurant.name === restName.name ?
+                                <MenuItemCard
+                                    item={item.item}
+                                    price={item.price}
+                                    description={item.description}
+                                    dietary={item.dietary}
+                                    restaurant={item.restaurant}
+                                    website={item.restaurant.website}
+                                    id={item.id} />
+                                : null}
+                                </div>
+                                </Container>
+                                </>
+                            )
+                        })}
                     </>
                     </div>
                 )

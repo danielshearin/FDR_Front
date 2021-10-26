@@ -15,10 +15,10 @@ const MenuItemCard = props => {
                 <SaveButton id={id} item={item} restaurant={restaurant}/>
                 <p class='description'>{description}</p>
                 <p class='dietary'>
-                {!dietary ? null : `${dietary}`}   
+                    {!dietary ? null : `${dietary}`}   
                 </p>
             </Segment>
-                <Divider hidden />
+            <Divider hidden />
         </Container>
         </>
     )

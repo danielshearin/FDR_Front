@@ -4,9 +4,9 @@ import _ from 'lodash';
 import axios from "axios";
 import ItemResults from "./ItemResults";
 import Map from "./Map";
-import RestaurantCard from "./RestaurantCard";
+// import RestaurantCard from "./RestaurantCard";
 import ResultBar from "./ResultBar";
-import { appendToMemberExpression } from "@babel/types";
+// import { appendToMemberExpression } from "@babel/types";
 
 
 const getOptions = (number, prefix = 'Choice ') =>
@@ -19,7 +19,6 @@ const getOptions = (number, prefix = 'Choice ') =>
 
 const dayOptions=[
     { key: 'd', text: "No Day Selected", value: 'none'},
-    // { key: 'a', text: 'Available Everyday', value: 'all_days' },
     { key: 'weekends', text: 'Weekends', value: "weekends"},
     { key: 'weekdays', text: 'Weekdays', value: "weekdays"},
     { key: 'm', text: 'Monday', value: 'monday' },
@@ -37,8 +36,6 @@ const dietaryOptions=[
     { key: 'veggie', text: 'Vegetarian', value: 'vegetarian'},
     { key: 'vega', text: 'Vegan', value: 'vegan'},
     { key: 'gluten_free', text: 'Gluten-free', value: 'gluten_free'},
-    // { key: 'vegetarian_and_gf', text: 'Vegetarian and Gluten-free', value: 'vegetarian_and_gf'},
-    // { key: 'vegan_and_gf', text: 'Vegan and Gluten-free', value: 'vegan_and_gf' }
 ]
 
 
@@ -109,20 +106,20 @@ const SearchForm = () => {
       console.log(data)
       
       
-      const array = []
+      const arrayRestObj = []
       // const restArray = []
       searchResult.data.map((item) => {
         const restaurantObject = (item.restaurant)
-        array.push(restaurantObject)
+        arrayRestObj.push(restaurantObject)
         // const restaurantNames = (item.restaurant.name)
         // restArray.push(restaurantNames)
       })
-      // setRestaurant(array)
+      // setRestaurant(arrayRestObj)
 
       // const uniqueRestaurants = [...new Set(restArray)];
       setItemResult(searchResult.data)
 
-      const uniqRestObjects = new Set(array.map(e => JSON.stringify(e)));
+      const uniqRestObjects = new Set(arrayRestObj.map(e => JSON.stringify(e)));
       const uniqRestObjArray = Array.from(uniqRestObjects).map(e => JSON.parse(e));
       setRestaurantNames(uniqRestObjArray)
 
@@ -143,22 +140,22 @@ const SearchForm = () => {
     <Container>
       <Form class="form" onSubmit={handleSubmit}>
 
-        <div class='label'><strong>Price Low $</strong></div>
+        <div class='label'><strong>Price High</strong></div>
           <Dropdown
-            placeholder='1'
+            label='Price High'
+            placeholder='$ 49'
             fluid search selection
-            options={getOptions(50, '')}
-            onChange={(e, {value}) => {setPriceLow(value)}}
+            options={getOptions(50, '$ ')}
+            onChange={(e, {value}) => {setPriceHigh(value)}}
           />
         <br />
 
-        <div class='label'><strong>Price High $</strong></div>
+        <div class='label'><strong>Price Low</strong></div>
           <Dropdown
-            label='Price High'
-            placeholder='49'
+            placeholder='$ 1'
             fluid search selection
-            options={getOptions(50, '')}
-            onChange={(e, {value}) => {setPriceHigh(value)}}
+            options={getOptions(priceHigh, '$ ')}
+            onChange={(e, {value}) => {setPriceLow(value)}}
           />
         <br />
 

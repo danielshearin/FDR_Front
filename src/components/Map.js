@@ -33,9 +33,9 @@ function Map ( {data} ) {
         .setPopup(new mapboxgl.Popup()
           .trackPointer()
           .setHTML(`<h4>${restaurant.name}</h4>
-          <p>${restaurant.phone}<br />
-          ${restaurant.street}</p>
-          <img src='https://five-dollar-lunch.herokuapp.com${restaurant.photo}'' width="150" height="100"> </img>`)
+            <p>${restaurant.phone}<br />
+            ${restaurant.street}</p>
+            <img src='https://five-dollar-lunch.herokuapp.com${restaurant.photo}'' width="150" height="100"> </img>`)
           )
         .addTo(map);
       });
@@ -63,15 +63,6 @@ function Map ( {data} ) {
       showUserHeading: true
       })
     );
-
-
-    // map.on('move', () => {
-    //   setLng(map.getCenter().lng.toFixed(4));
-    //   setLat(map.getCenter().lat.toFixed(4));
-    //   setZoom(map.getZoom().toFixed(2));
-    // });
-
-
 
     // Clean up on unmount
     return () => map.remove();

@@ -7,11 +7,11 @@ const RestaurantCard = props => {
     return (
         <>
             <Container>
-            <Header size='large'>
-            <a href={website} target="_blank" rel="noopener noreferrer">
-                <div class='restaurant_name'>{name}</div>
-            </a>
-            </Header>
+                <Header size='large'>
+                    <a href={website} target="_blank" rel="noopener noreferrer">
+                        <div class='restaurant_name'>{name}</div>
+                    </a>
+                </Header>
             </Container>
         </>
     )
