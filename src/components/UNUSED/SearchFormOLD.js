@@ -1,25 +1,13 @@
-import React, { Fragment } from "react";
-import { Field, reduxForm } from "redux-form";
-// import { Form, Field } from 'react-final-form';
-import { Form } from "semantic-ui-react";
+import React, { useState, useEffect } from "react";
+import { Form, Dropdown, Divider, Button, Container } from "semantic-ui-react";
 import _ from 'lodash';
-import RestResults from "./RestResults";
 import axios from "axios";
+import ItemResults from "./ItemResults";
+import Map from "./Map";
+// import RestaurantCard from "./RestaurantCard";
+import ResultBar from "./ResultBar";
+// import { appendToMemberExpression } from "@babel/types";
 
-
-
-
-    
-const renderSelect = (field) => (
-    <Form.Select
-        label={field.label}
-        name={field.input.name}
-        onChange={(e, { value }) => field.input.onChange(value)}
-        options={field.options}
-        placeholder={field.placeholder}
-        value={field.input.value}
-    />
-);
 
 const getOptions = (number, prefix = 'Choice ') =>
     _.times(number, (index) => ({
@@ -30,26 +18,26 @@ const getOptions = (number, prefix = 'Choice ') =>
 
 
 const dayOptions=[
-    { key: 'a', text: 'All Days', value: 'allDays' },
-    { key: 'weekends', text: 'Weekends', value: 'weekends' },
-    { key: 'weekdays', text: 'Weekdays', value: 'weekdays' },
+    { key: 'd', text: "No Day Selected", value: 'none'},
+    { key: 'weekends', text: 'Weekends', value: "weekends"},
+    { key: 'weekdays', text: 'Weekdays', value: "weekdays"},
     { key: 'm', text: 'Monday', value: 'monday' },
     { key: 'tu', text: 'Tuesday', value: 'tuesday' },
     { key: 'w', text: 'Wednesday', value: 'wednesday' },
     { key: 'th', text: 'Thursday', value: 'thursday' },
     { key: 'f', text: 'Friday', value: 'friday' },
     { key: 'sa', text: 'Saturday', value: 'saturday' },
-    { key: 'su', text: 'Sunday', value: 'sunday' }
+    { key: 'su', text: 'Sunday', value: 'sunday' },
 ]
 
+
 const dietaryOptions=[
-    { key: 'all', text: 'No Restrictions', value: 'all' },
-    { key: 'vegetarian', text: 'vegetarian', value: 'vegetarian' },
-    { key: 'vegan', text: 'vegan', value: 'vegan' },
-    { key: 'glueten-free', text: 'glueten-free', value: 'glueten-free' },
-    { key: 'vegetarian_and_gluten-free', text: 'vegetarian and gluten-free', value: 'vegetarian_and_luten-free' },
-    { key: 'vegan_and_gluten-free', text: 'vegan and gluten-free', value: 'vegan_and_gluten-free' }
+    { key: 'all', text: 'No Restrictions', value: 'none' },
+    { key: 'veggie', text: 'Vegetarian', value: 'vegetarian'},
+    { key: 'vega', text: 'Vegan', value: 'vegan'},
+    { key: 'gluten_free', text: 'Gluten-free', value: 'gluten_free'},
 ]
+
 
 const timeOptions=[
     { key: '5 am', text: '5 am', value: '5' },
@@ -79,60 +67,146 @@ const timeOptions=[
 ]
 
 
-const SearchForm = props => {
-    const { handleSubmit, reset } = props;
 
-    return (
-        <Fragment>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group widths="equal">
-                    <Field
-                        label="Price Low"
-                        component={renderSelect}
-                        name="priceLow"
-                        selection
-                        options={getOptions(50, '')}
-                        placeholder={1}
-                    />
-                    <Field
-                        label="Price High"
-                        component={renderSelect}
-                        name="priceHigh"
-                        selection
-                        options={getOptions(50, '')}
-                        placeholder={49}
-                    />
-                    <Field
-                        label="Day"
-                        component={renderSelect}
-                        name="day"                    
-                        fluid multiple selection options={dayOptions}
-                        placeholder="All Days"
-                    />
-                    <Field
-                        label="Time"
-                        component={renderSelect}
-                        name="time"                    
-                        options={timeOptions}
-                        placeholder="Time"
-                    />
-                    <Field
-                        label="Dietary Restrictions"
-                        component={renderSelect}
-                        name="dietary"                    
-                        fluid multiple selection options={dietaryOptions}
-                        placeholder="No Restrictions"
-                    />
-                </Form.Group>
-                <Form.Group inline>
-                    <Form.Button primary>GO</Form.Button>
-                    <Form.Button onClick={reset}>Reset</Form.Button>
-                </Form.Group>
-            </Form>
-        </Fragment>
-    );
-};
 
-export default reduxForm({
-    form: "profile"
-})(SearchForm);
+const SearchForm = () => {
+
+  // const [restaurant, setRestaurant] = useState(null)
+  const [restaurantNames, setRestaurantNames] = useState(null)
+  const [itemResult, setItemResult] = useState()
+  const [priceLow, setPriceLow] = useState(1)
+  const [priceHigh, setPriceHigh] = useState(49)
+  const [time, setTime] = useState('12')
+  const [day, setDay] = useState(['none'])
+  const [dietary, setDietary] = useState(['none'])
+
+  useEffect(() => {
+    axios.get("https://five-dollar-lunch.herokuapp.com/api/restaurants")
+    .then(response => {
+      const restaurants = response.data
+      setRestaurantNames(restaurants)
+    });
+  }, [])
+
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault()
+
+      const data = {
+        "price_low":priceLow,
+        "price_high":priceHigh,
+        "time":time,
+        "day":day,
+        "dietary":dietary 
+      }
+      
+      
+      const searchResult = await axios.post("https://five-dollar-lunch.herokuapp.com/api/searchitems", data)
+      console.log(data)
+      
+      
+      const arrayRestObj = []
+      // const restArray = []
+      searchResult.data.map((item) => {
+        const restaurantObject = (item.restaurant)
+        arrayRestObj.push(restaurantObject)
+        // const restaurantNames = (item.restaurant.name)
+        // restArray.push(restaurantNames)
+      })
+      // setRestaurant(arrayRestObj)
+
+      // const uniqueRestaurants = [...new Set(restArray)];
+      setItemResult(searchResult.data)
+
+      const uniqRestObjects = new Set(arrayRestObj.map(e => JSON.stringify(e)));
+      const uniqRestObjArray = Array.from(uniqRestObjects).map(e => JSON.parse(e));
+      setRestaurantNames(uniqRestObjArray)
+
+
+
+      // OLD CODE for reference
+          /*.get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)*/
+          
+        } catch (error) {
+          console.error(error.message)
+        }
+      }
+
+
+
+  return (
+    <>
+    <Container>
+      <Form class="form" onSubmit={handleSubmit}>
+
+        <div class='label'><strong>Price High</strong></div>
+          <Dropdown
+            label='Price High'
+            placeholder='$ 49'
+            fluid search selection
+            options={getOptions(50, '$ ')}
+            onChange={(e, {value}) => {setPriceHigh(value)}}
+          />
+        <br />
+
+        <div class='label'><strong>Price Low</strong></div>
+          <Dropdown
+            placeholder='$ 1'
+            fluid search selection
+            options={getOptions(priceHigh, '$ ')}
+            onChange={(e, {value}) => {setPriceLow(value)}}
+          />
+        <br />
+
+        <div class='label'><strong>Time</strong></div>
+          <Dropdown
+            fluid search selection
+            options={timeOptions}
+            placeholder="Noon"
+            onChange={(e, {value}) => {setTime(value)}}
+          />
+        <br />
+
+        <div class='label'><strong>Day</strong></div>
+          <Dropdown
+            fluid search selection
+            fluid multiple selection
+            options={dayOptions}
+            placeholder="No Day Selected"
+            onChange={(e, {value}) => {setDay(value)}}
+          />
+        <br />
+
+        <div class='label'><strong>Dietary Needs</strong></div>
+          <Dropdown
+            label='Dietary Restrictions'
+            placeholder='No Restrictions'
+            fluid search selection
+            fluid multiple selection
+            options={dietaryOptions}
+            onChange={(e, {value}) => {setDietary(value)}}
+          />
+          <br />
+        
+        <Divider hidden />
+        <Button type='submit' class='button'>GO</Button>
+
+        <Divider hidden />
+      </Form>
+      <Divider hidden />
+      
+{/* CHECKS SEARCH DATA */}
+      {/* <strong>onChange:</strong>
+      <pre>{JSON.stringify({ priceLow, priceHigh, time, day, dietary }, null, 2)}</pre> */}
+
+    </Container>
+    {restaurantNames ? <Map data={restaurantNames} /> : ''}
+    <ResultBar />
+    <Divider hidden />
+    <ItemResults data={itemResult} restaurants={restaurantNames} />
+    </>
+  )
+}
+
+export default SearchForm

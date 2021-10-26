@@ -4,9 +4,7 @@ import _ from 'lodash';
 import axios from "axios";
 import ItemResults from "./ItemResults";
 import Map from "./Map";
-// import RestaurantCard from "./RestaurantCard";
 import ResultBar from "./ResultBar";
-// import { appendToMemberExpression } from "@babel/types";
 
 
 const getOptions = (number, prefix = 'Choice ') =>
@@ -68,7 +66,6 @@ const timeOptions=[
 
 
 
-
 const SearchForm = () => {
 
   // const [restaurant, setRestaurant] = useState(null)
@@ -101,37 +98,25 @@ const SearchForm = () => {
         "dietary":dietary 
       }
       
-      
       const searchResult = await axios.post("https://five-dollar-lunch.herokuapp.com/api/searchitems", data)
       console.log(data)
       
-      
       const arrayRestObj = []
-      // const restArray = []
       searchResult.data.map((item) => {
         const restaurantObject = (item.restaurant)
         arrayRestObj.push(restaurantObject)
-        // const restaurantNames = (item.restaurant.name)
-        // restArray.push(restaurantNames)
       })
-      // setRestaurant(arrayRestObj)
 
-      // const uniqueRestaurants = [...new Set(restArray)];
       setItemResult(searchResult.data)
 
       const uniqRestObjects = new Set(arrayRestObj.map(e => JSON.stringify(e)));
       const uniqRestObjArray = Array.from(uniqRestObjects).map(e => JSON.parse(e));
       setRestaurantNames(uniqRestObjArray)
-
-
-
-      // OLD CODE for reference
-          /*.get(`/api/menuitems&priceLow=${priceLow}&priceHigh=${priceHigh}&day=${day}&time=${time}&dietary=${dietary}`)*/
           
-        } catch (error) {
-          console.error(error.message)
-        }
-      }
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
 
 
 
@@ -191,8 +176,8 @@ const SearchForm = () => {
         
         <Divider hidden />
         <Button type='submit' class='button'>GO</Button>
-
         <Divider hidden />
+
       </Form>
       <Divider hidden />
       
