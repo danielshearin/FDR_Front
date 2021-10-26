@@ -11,14 +11,12 @@ const MenuItemCard = props => {
         <>
         <Container>
             <Segment>
-                <a href={website} target="_blank"  rel="noopener noreferrer">
                 <h3 class='item'>{item}<div class='price'>${price}</div></h3>
                 <SaveButton id={id} item={item} restaurant={restaurant}/>
                 <p class='description'>{description}</p>
                 <p class='dietary'>
                 {!dietary ? null : `${dietary}`}   
                 </p>
-                </a>
             </Segment>
                 <Divider hidden />
         </Container>

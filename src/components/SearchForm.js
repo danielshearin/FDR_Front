@@ -121,9 +121,15 @@ const SearchForm = () => {
         restArray.push(restaurantNames)
       })
       setRestaurant(array)
+      console.log(array)
       const uniqueRestaurants = [...new Set(restArray)];
       setItemResult(searchResult.data)
-      setRestaurantNames(uniqueRestaurants)
+
+      const uniqRestObjects = new Set(array.map(e => JSON.stringify(e)));
+      const uniqRestObjArray = Array.from(uniqRestObjects).map(e => JSON.parse(e));
+      console.log(uniqRestObjArray)
+      setRestaurantNames(uniqRestObjArray)
+
 
 
       // OLD CODE for reference

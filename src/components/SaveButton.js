@@ -58,7 +58,7 @@ class SaveButton extends Component {
       return (
         <>
         <div class='cart_button'>
-        <Button toggle active={active} onClick={this.handleAdd}animated='vertical' floated='right'>
+        <Button toggle active={active} onClick={this.handleAdd} animated='vertical' floated='right'>
         <Button.Content hidden>Fav</Button.Content>
         <Button.Content visible>
         <Icon name='star' />

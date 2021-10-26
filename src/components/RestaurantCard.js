@@ -8,9 +8,9 @@ const RestaurantCard = props => {
         <>
             <Container>
             <Header size='large'>
-            {/* <a href={website}> */}
+            <a href={website} target="_blank" rel="noopener noreferrer">
                 <div class='restaurant_name'>{name}</div>
-            {/* </a> */}
+            </a>
             </Header>
             </Container>
         </>

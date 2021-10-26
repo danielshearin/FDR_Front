@@ -19,15 +19,15 @@ function ItemResults ( {data, restaurants} ) {
                     <div class='rest_item_result'>
                     <>                 
                     <RestaurantCard 
-                        name={restName}
-                        // website={data.restaurant.website}
+                        name={restName.name}
+                        website={restName.website}
                         />
                     {data.map((item) => {
                         return (
                             <>
                             <Container>
                             <div class="item_result_group">
-                            {item.restaurant.name === restName ?
+                            {item.restaurant.name === restName.name ?
                             <MenuItemCard
                                 item={item.item}
                                 price={item.price}
