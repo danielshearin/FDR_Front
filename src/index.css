@@ -141,8 +141,9 @@ code {
 
 .description {
   padding-right: 100px;
-  font-style: italic;
-  color:rgb(43, 43, 43);
+  /* font-style: italic; */
+  color:rgb(75, 74, 74);
+  font-size: 11pt;
 
 }
 
@@ -151,6 +152,7 @@ code {
   font-style: bold;
   font-style: italic;
   padding-top: 5px;
+  font-size: 11pt;
 }
 
 .ui.button.toggle {

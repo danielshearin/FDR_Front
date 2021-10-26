@@ -20,6 +20,7 @@ function ItemResults ( {data, restaurants} ) {
                     <>                 
                     <RestaurantCard 
                         name={restName}
+                        // website={data.restaurant.website}
                         />
                     {data.map((item) => {
                         return (
@@ -33,6 +34,7 @@ function ItemResults ( {data, restaurants} ) {
                                 description={item.description}
                                 dietary={item.dietary}
                                 restaurant={item.restaurant}
+                                website={item.restaurant.website}
                                 id={item.id} />
                             : null}
                             </div>

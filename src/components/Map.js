@@ -44,13 +44,25 @@ function Map ( {data} ) {
     const directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
       unit: 'imperial',
-      profile: 'mapbox/driving'
+      profile: 'mapbox/driving-traffic'
     });
   
     map.addControl(directions, 'top-left');
 
     // Add navigation control (the +/- zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+      positionOptions: {
+      enableHighAccuracy: true
+      },
+      // When active the map will receive updates to the device's location as it changes.
+      trackUserLocation: true,
+      // Draw an arrow next to the location dot to indicate which direction the device is heading.
+      showUserHeading: true
+      })
+    );
 
 
     // map.on('move', () => {
