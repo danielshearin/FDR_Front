@@ -78,7 +78,7 @@ const SearchForm = () => {
   const [restaurant, setRestaurant] = useState(null)
 
   useEffect(() => {
-    axios.get("/api/restaurants")
+    axios.get("https://five-dollar-lunch.herokuapp.com/api/restaurants")
     .then(response => {
       const restaurants = response.data
       setRestaurant(restaurants)
@@ -108,7 +108,7 @@ const SearchForm = () => {
       }
       
       
-      const searchResult = await axios.post("/api/searchitems", data)
+      const searchResult = await axios.post("https://five-dollar-lunch.herokuapp.com//api/searchitems", data)
       console.log(data)
       
       
