@@ -7,13 +7,19 @@ import Map from "./Map";
 import ResultBar from "./ResultBar";
 
 
-const getOptions = (number, prefix = 'Choice ') =>
-    _.times(number, (index) => ({
-        key: index,
-        text: `${prefix}${index}`,
-        value: index,
+const getOptions = (number, prefix) =>
+  _.times(number, (index) => ({
+      key: index,
+      text: `${prefix}${index}`,
+      value: index,
 }))
 
+//   $(function(){
+//     var $select = $(".1-100");
+//     for (i=1;i<=100;i++){
+//         $select.append($('<option></option>').val(i).html(i))
+//     }
+// })
 
 const dayOptions=[
     { key: 'd', text: "No Day Selected", value: 'none'},
