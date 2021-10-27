@@ -83,10 +83,11 @@ const SearchForm = () => {
   const [dietary, setDietary] = useState(['none'])
 
   useEffect(() => {
-    axios.get("https://five-dollar-lunch.herokuapp.com/api/restaurants")
+    axios.get("https://five-dollar-lunch.herokuapp.com/api/restaurants/")
     .then(response => {
       const restaurants = response.data
       setRestaurantObjects(restaurants)
+      console.log(restaurantObjects)
     });
   }, [])
 
@@ -130,6 +131,15 @@ const SearchForm = () => {
     <Container>
       <Form class="form" onSubmit={handleSubmit}>
 
+        <div class='label'><strong>Lowest Price</strong></div>
+          <Dropdown
+            placeholder='$ 1'
+            fluid search selection
+            options={getOptions(50, '$ ')}
+            onChange={(e, {value}) => {setPriceLow(value)}}
+          />
+        <br />
+
         <div class='label'><strong>Highest Price</strong></div>
           <Dropdown
             label='Price High'
@@ -137,15 +147,6 @@ const SearchForm = () => {
             fluid search selection
             options={getOptions(50, '$ ')}
             onChange={(e, {value}) => {setPriceHigh(value)}}
-          />
-        <br />
-
-        <div class='label'><strong>Lowest Price</strong></div>
-          <Dropdown
-            placeholder='$ 1'
-            fluid search selection
-            options={getOptions(priceHigh, '$ ')}
-            onChange={(e, {value}) => {setPriceLow(value)}}
           />
         <br />
 
@@ -194,7 +195,7 @@ const SearchForm = () => {
     {restaurantObjects ? <Map data={restaurantObjects} /> : ''}
     <ResultBar />
     <Divider hidden />
-    <ItemResults data={itemResult} restaurants={restaurantObjects} />
+    {itemResult ? <ItemResults data={itemResult} restaurants={restaurantObjects} /> : ''}
     </>
   )
 }

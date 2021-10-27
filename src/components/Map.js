@@ -23,7 +23,7 @@ function Map ( {data} ) {
       zoom: zoom,
       });
 
-
+    console.log('loaded map')
 
     data.map((restaurant) => {
       const coordinates = [(restaurant.longitude), (restaurant.latitude)]
