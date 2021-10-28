@@ -44,7 +44,7 @@ const dayOptions=[
 const dietaryOptions=[
     { key: 'all', text: 'No Restrictions', value: 'none' },
     { key: 'veggie', text: 'Vegetarian', value: 'vegetarian'},
-    { key: 'vega', text: 'Vegan', value: 'vegan'},
+    { key: 'vegan', text: 'Vegan', value: 'vegan'},
     { key: 'gluten_free', text: 'Gluten-free', value: 'gluten_free'},
 ]
 

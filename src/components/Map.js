@@ -65,7 +65,7 @@ function Map ( {data} ) {
 
     // Clean up on unmount
     return () => map.remove();
-  }); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Container>
