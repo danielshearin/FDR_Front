@@ -7,19 +7,25 @@ import Map from "./Map";
 import ResultBar from "./ResultBar";
 
 
-const getOptions = (number, prefix) =>
+const lowPriceOptions = (number, prefix) =>
   _.times(number, (index) => ({
       key: index,
       text: `${prefix}${index}`,
       value: index,
 }))
 
-//   $(function(){
-//     var $select = $(".1-100");
-//     for (i=1;i<=100;i++){
-//         $select.append($('<option></option>').val(i).html(i))
-//     }
-// })
+
+const highPriceOptions = (priceLow) => {
+  const highPrices = []
+  for (var i=0; i < 50; i++) {
+    if (i <= priceLow) {
+      continue;
+    }
+    highPrices.push({key: i, text:`$ ${i}`, value: i})
+  }
+  return(highPrices)
+}
+
 
 const dayOptions=[
     { key: 'd', text: "No Day Selected", value: 'none'},
@@ -135,7 +141,7 @@ const SearchForm = () => {
           <Dropdown
             placeholder='$ 1'
             fluid search selection
-            options={getOptions(50, '$ ')}
+            options={lowPriceOptions(50, '$ ')}
             onChange={(e, {value}) => {setPriceLow(value)}}
           />
         <br />
@@ -145,7 +151,7 @@ const SearchForm = () => {
             label='Price High'
             placeholder='$ 49'
             fluid search selection
-            options={getOptions(50, '$ ')}
+            options={highPriceOptions(priceLow)}
             onChange={(e, {value}) => {setPriceHigh(value)}}
           />
         <br />
@@ -161,8 +167,7 @@ const SearchForm = () => {
 
         <div class='label'><strong>Day of Week</strong></div>
           <Dropdown
-            fluid search selection
-            fluid multiple selection
+            fluid multiple selection search
             options={dayOptions}
             placeholder="No Day Selected"
             onChange={(e, {value}) => {setDay(value)}}
@@ -173,8 +178,7 @@ const SearchForm = () => {
           <Dropdown
             label='Dietary Restrictions'
             placeholder='No Restrictions'
-            fluid search selection
-            fluid multiple selection
+            fluid multiple selection search
             options={dietaryOptions}
             onChange={(e, {value}) => {setDietary(value)}}
           />
