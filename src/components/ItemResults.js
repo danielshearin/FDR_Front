@@ -4,7 +4,6 @@ import { Container } from "semantic-ui-react";
 import RestaurantCard from "./RestaurantCard";
 
 
-
 function ItemResults ( {data, restaurants} ) {
     console.log(data)
     console.log(restaurants)

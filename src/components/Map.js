@@ -8,7 +8,6 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsc2hlYXJpbiIsImEiOiJja3U1bmZteXAwcmttM
 
 
 function Map ( {data} ) {
-  // console.log(data)
   const mapContainerRef = useRef(null);
   const [lng, setLng] = useState(-82.57);
   const [lat, setLat] = useState(35.593);
