@@ -104,6 +104,14 @@ code {
   border-radius: 12px;
 }
 
+.no_results {
+  color: #6b85b4f1;
+}
+
+.no_result {
+  padding-left: 20px;
+}
+
 .rest_item_result {
   padding-bottom: 30px;
 }

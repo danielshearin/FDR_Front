@@ -1,6 +1,6 @@
 import React from "react";
 import MenuItemCard from "./MenuItemCard";
-import { Container } from "semantic-ui-react";
+import { Container, Header } from "semantic-ui-react";
 import RestaurantCard from "./RestaurantCard";
 
 
@@ -10,7 +10,16 @@ function ItemResults ( {data, restaurants} ) {
     
     return (
         <>
-        {restaurants && (
+        {(restaurants.length === 0) ?
+            <Container>
+                <div class='no_result'>
+                    <Header size='large'>
+                        <div class='no_results'>No Results</div>
+                    </Header>
+                    <p class='dietary'>Try broadening your search</p>
+                </div>
+            </Container>
+            : (
             <div>
             {restaurants.map((restName) => {
                 return (
