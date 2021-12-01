@@ -4,6 +4,7 @@ import { Container, Header } from "semantic-ui-react";
 import RestaurantCard from "./RestaurantCard";
 
 
+// uses both the single-instance restaurant array as well as the full set of data from search result
 function ItemResults ( {data, restaurants} ) {
     console.log(data)
     console.log(restaurants)
@@ -21,6 +22,7 @@ function ItemResults ( {data, restaurants} ) {
             </Container>
             : (
             <div>
+            {/* map over single-instance restaurant object to group items by restaurant*/}
             {restaurants.map((restName) => {
                 return (
                     <div class='rest_item_result'>
@@ -29,6 +31,7 @@ function ItemResults ( {data, restaurants} ) {
                             name={restName.name}
                             website={restName.website}
                             />
+                        {/* map over full data set to display each item under corresponding restaurant */}
                         {data.map((item) => {
                             return (
                                 <>

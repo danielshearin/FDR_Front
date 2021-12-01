@@ -7,6 +7,7 @@ import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsc2hlYXJpbiIsImEiOiJja3U1bmZteXAwcmttMnBtcmpmYmRvc3FxIn0.4A5oFR0BXqoK60ppEgngJQ';
 
 
+// uses the single-instance restaurant array
 function Map ( {data} ) {
   const mapContainerRef = useRef(null);
   const [lng, setLng] = useState(-82.57);
@@ -23,7 +24,7 @@ function Map ( {data} ) {
       });
 
     console.log('loaded map')
-
+    
     data.map((restaurant) => {
       const coordinates = [(restaurant.longitude), (restaurant.latitude)]
       let marker = new mapboxgl.Marker()
@@ -38,7 +39,7 @@ function Map ( {data} ) {
         .addTo(map);
       });
 
-
+    // Add directions
     const directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
       unit: 'imperial',

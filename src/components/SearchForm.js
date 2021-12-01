@@ -15,6 +15,7 @@ const lowPriceOptions = (number, prefix) =>
 }))
 
 
+// use priceLow to set beginning of range for priceHigh
 const highPriceOptions = (priceLow) => {
   const highPrices = []
   for (var i=0; i < 50; i++) {
@@ -88,7 +89,9 @@ const SearchForm = () => {
   const [day, setDay] = useState(['none'])
   const [dietary, setDietary] = useState(['none'])
 
+
   useEffect(() => {
+    // Get initial restaurant data from API to pre-populate map
     axios.get("https://five-dollar-lunch.herokuapp.com/api/restaurants/")
     .then(response => {
       const restaurants = response.data
@@ -97,11 +100,12 @@ const SearchForm = () => {
     });
   }, [])
 
-
+  // Form Submission
   const handleSubmit = async (e) => {
     try {
       e.preventDefault()
 
+      // set data from form for post request
       const data = {
         "price_low":priceLow,
         "price_high":priceHigh,
@@ -110,9 +114,11 @@ const SearchForm = () => {
         "dietary":dietary 
       }
       
+      // send search data to API
       const searchResult = await axios.post("https://five-dollar-lunch.herokuapp.com/api/searchitems", data)
       console.log(data)
       
+      // make restaurant objects for search results
       const arrayRestObj = []
       searchResult.data.map((item) => {
         const restaurantObject = (item.restaurant)
@@ -121,6 +127,7 @@ const SearchForm = () => {
 
       setItemResult(searchResult.data)
 
+      // use Set Constructor to create one instance per restaurant for search item results
       const uniqRestObjects = new Set(arrayRestObj.map(e => JSON.stringify(e)));
       const uniqRestObjArray = Array.from(uniqRestObjects).map(e => JSON.parse(e));
       setRestaurantObjects(uniqRestObjArray)
@@ -151,6 +158,7 @@ const SearchForm = () => {
             label='Price High'
             placeholder='$ 49'
             fluid search selection
+            // use priceLow to set beginning of range for priceHigh
             options={highPriceOptions(priceLow)}
             onChange={(e, {value}) => {setPriceHigh(value)}}
           />
